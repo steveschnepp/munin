@@ -773,9 +773,16 @@ sub parse_custom_resolution {
 
         my @computer_format;
 
-	# First element is always the full resoltion, converting to computer format
-	my $full_res = shift @elems; 
-	unshift @elems, "$update_rate for $full_res";
+        # First element is always the full resolution, so no multiplier
+        # involved.
+        my $full_res = shift @elems;
+        if ($full_res =~ m/^\d+$/) {
+                # Only numeric, computer format
+                unshift @elems, "1 $full_res";
+        } else {
+                # Human readable. Adding $update_rate in front of
+                unshift @elems, "$update_rate for $full_res";
+        }
 
         foreach my $elem (@elems) {
                 if ($elem =~ m/(\d+) (\d+)/) {
