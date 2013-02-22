@@ -1264,7 +1264,12 @@ sub munin_get_filename {
         return;
     }
     
-    return ($ret . "/$loc-" . lc substr (munin_get($hash, "type", "GAUGE"), 0,1). ".rrd");
+    my $filename = $ret . "/$loc-" . lc substr (munin_get($hash, "type", "GAUGE"), 0,1). ".rrd";
+
+    # XXX - change the filename to squash the last / into -
+    # It is a workaround for ticket #1224
+    $filename =~ s!(.+)/!$1-! unless (-e $filename);
+    return $filename;
 }
 
 
