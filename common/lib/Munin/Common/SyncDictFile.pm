@@ -4,6 +4,7 @@ our @ISA = qw(Tie::Hash);
 
 our $DEBUG_ENABLED;
 
+use IO::Dir;
 use IO::File;
 
 # The method invoked by the command tie %hash, classname. 
@@ -13,12 +14,12 @@ use IO::File;
 sub TIEHASH {
 	my $classname = shift;
 
-	my ($filename) = @_;
+	my ($dirname) = @_;
 	my $self = {
-		filename => $filename,
+		dirname => $dirname,
 	};
 
-	new IO::File($filename, O_CREAT) unless (-f $filename);
+	new IO::Dir($dirname, O_CREAT) unless (-d $dirname);
 
 	return bless($self, $classname);
 }
@@ -185,11 +186,13 @@ sub DEBUG {
 	print STDOUT "[DEBUG] @_" . "\n" if $DEBUG_ENABLED; 
 }
 
-# XXX - collision if there is a ____
-# But should not happen often anyway
+# The key is a filename, it cannot contain "/". Everything else is OK.
+# / has to be escaped to something seldom used : "§".
+# XXX - There is a slight possiblity of collision
 sub escape_key {
 	my $key = shift;
-	$key =~ s/:/____/g;
+	$key =~ s,/,§~,g;  # maps "/" to single : "§"
+	$key =~ s,§,§§,g;  # maps "/" to single : "§"
 	return $key;
 }
 
