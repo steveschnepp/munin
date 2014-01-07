@@ -14,6 +14,7 @@ use Munin::Common::Timeout;
 use Munin::Common::TLSClient;
 use Data::Dumper;
 use Log::Log4perl qw( :easy );
+use IO::Socket::INET6;
 
 my $config = Munin::Master::Config->instance()->{config};
 
@@ -58,7 +59,7 @@ sub _do_connect {
     LOGCROAK("[FATAL] No address!  Did you forget to set 'update no' or to set 'address <IP>' ?")
 	if !defined($self->{address});
 
-    if (! ( $self->{socket} = IO::Socket::INET->new(
+    if (! ( $self->{socket} = IO::Socket::INET6->new(
 		PeerAddr  => $self->{address},
 		PeerPort  => $self->{port},
 		LocalAddr => $config->{local_address},
