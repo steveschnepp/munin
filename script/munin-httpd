@@ -40,6 +40,16 @@ my @times = qw(day week month year);
 # XXX - this is NOT thread-safe!
 my $cgi;
 
+{
+	# Create new subroutine to tell HTTP::Server::Simple that we want
+	# to be a preforking server
+	no strict 'refs'; ## no critic (TestingAndDebugging::ProhibitNoStrict)
+	*{__PACKAGE__ . "::net_server"} = sub {
+		my $server = 'Net::Server::PreFork';
+		return $server;
+	};
+}
+
 sub handle_request
 {
 	my $self = shift;
@@ -59,4 +69,10 @@ sub handle_request
 package main;
 
 # start the server on port 4948
-Munin::Master::Http->new(4948)->run();
+my $srv = Munin::Master::Http->new(4948);
+$srv->run(
+max_servers => 4,
+min_servers  => 2,
+max_servers  => 8,
+min_spare_servers=> 1,
+);
