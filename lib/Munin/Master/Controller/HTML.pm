@@ -1,4 +1,4 @@
-package Munin::Master::HTML;
+package Munin::Master::Controller::HTML;
 
 use strict;
 use warnings;
@@ -213,12 +213,12 @@ sub handle_request {
 
         my $sth = $dbh->prepare_cached(
 "SELECT nu.path, n.name, su.path, s.name, d.critical, d.warning, d.unknown FROM ds d
-				LEFT OUTER JOIN service s ON s.id = d.service_id
-				LEFT OUTER JOIN url su ON su.id = s.id and su.type = 'service'
-				LEFT OUTER JOIN node n ON n.id = s.node_id
-				LEFT OUTER JOIN url nu ON nu.id = n.id and nu.type = 'node'
-				WHERE d.critical = 1 OR d.warning = 1 OR d.unknown = 1
-			"
+                                LEFT OUTER JOIN service s ON s.id = d.service_id
+                                LEFT OUTER JOIN url su ON su.id = s.id and su.type = 'service'
+                                LEFT OUTER JOIN node n ON n.id = s.node_id
+                                LEFT OUTER JOIN url nu ON nu.id = n.id and nu.type = 'node'
+                                WHERE d.critical = 1 OR d.warning = 1 OR d.unknown = 1
+                        "
         );
         $sth->execute();
 
@@ -283,18 +283,18 @@ sub handle_request {
             # account for those that explictly mention 'other' as category
             $sth_cat = $dbh->prepare_cached(
                 "SELECT DISTINCT s.name FROM service s
-				LEFT JOIN service_categories sc ON s.id = sc.id
-				WHERE sc.category = 'other' OR sc.id IS NULL
-				ORDER BY s.name"
+                                LEFT JOIN service_categories sc ON s.id = sc.id
+                                WHERE sc.category = 'other' OR sc.id IS NULL
+                                ORDER BY s.name"
             );
             $sth_cat->execute();
         }
         else {
             $sth_cat = $dbh->prepare_cached(
                 "SELECT DISTINCT s.name FROM service s
-				INNER JOIN service_categories sc ON s.id = sc.id
-				WHERE sc.category = ?
-				ORDER BY s.name"
+                                INNER JOIN service_categories sc ON s.id = sc.id
+                                WHERE sc.category = ?
+                                ORDER BY s.name"
             );
             $sth_cat->execute($category);
         }
@@ -399,9 +399,9 @@ sub handle_request {
             # Get all categories in this group
             my $sth_cat = $dbh->prepare_cached(
                 "SELECT DISTINCT sa_c.category cat FROM node n
-				INNER JOIN service s ON s.node_id = n.id
-				INNER JOIN service_categories sa_c ON sa_c.id = s.id
-				WHERE n.grp_id = ? ORDER BY sa_c.category ASC"
+                                INNER JOIN service s ON s.node_id = n.id
+                                INNER JOIN service_categories sa_c ON sa_c.id = s.id
+                                WHERE n.grp_id = ? ORDER BY sa_c.category ASC"
             );
             $sth_cat->execute($id);
 
@@ -439,9 +439,9 @@ sub handle_request {
         # Construct list of peers
         my $sth_peer = $dbh->prepare_cached(
             "SELECT n.name, u.path FROM node n
-			INNER JOIN url u ON n.id = u.id AND u.type = 'node'
-			WHERE n.grp_id = (SELECT n.grp_id FROM node n WHERE n.id = ?)
-			ORDER BY n.name ASC"
+                        INNER JOIN url u ON n.id = u.id AND u.type = 'node'
+                        WHERE n.grp_id = (SELECT n.grp_id FROM node n WHERE n.id = ?)
+                        ORDER BY n.name ASC"
         );
         $sth_peer->execute($id);
 
@@ -457,9 +457,9 @@ sub handle_request {
 
         my $sth_category = $dbh->prepare(
             "SELECT DISTINCT sc.category as graph_category FROM service s
-			INNER JOIN service_categories sc ON sc.id = s.id
-			WHERE s.node_id = ?
-			ORDER BY graph_category"
+                        INNER JOIN service_categories sc ON sc.id = s.id
+                        WHERE s.node_id = ?
+                        ORDER BY graph_category"
         );
         $sth_category->execute($id);
 
@@ -492,11 +492,11 @@ sub handle_request {
 
         $sth = $dbh->prepare_cached(
             "SELECT name,service_title,graph_info,subgraphs,category,
-									(SELECT MAX(warning) FROM ds WHERE service_id = service.id) as state_warning,
-									(SELECT MAX(critical) FROM ds WHERE service_id = service.id) as state_critical
-									FROM service
-									LEFT JOIN service_categories ON service.id = service_categories.id
-									WHERE service.id = ?"
+                                                                        (SELECT MAX(warning) FROM ds WHERE service_id = service.id) as state_warning,
+                                                                        (SELECT MAX(critical) FROM ds WHERE service_id = service.id) as state_critical
+                                                                        FROM service
+                                                                        LEFT JOIN service_categories ON service.id = service_categories.id
+                                                                        WHERE service.id = ?"
         );
         $sth->execute($id);
         my ( $graph_name, $graph_title, $graph_info, $multigraph, $category,
@@ -735,21 +735,21 @@ sub _get_params_services_for_comparison {
 # Get all possible services with the specified category under the specified group
     my $sth_srv = $dbh->prepare_cached(
         "SELECT DISTINCT s.name, s.service_title FROM service s
-		INNER JOIN node n ON s.node_id = n.id
-		INNER JOIN service_categories sa_c ON sa_c.id = s.id AND sa_c.category = ?
-		WHERE n.grp_id = ? ORDER BY s.name ASC"
+                INNER JOIN node n ON s.node_id = n.id
+                INNER JOIN service_categories sa_c ON sa_c.id = s.id AND sa_c.category = ?
+                WHERE n.grp_id = ? ORDER BY s.name ASC"
     );
 
     # Get node and service pairs
     my $sth_node = $dbh->prepare_cached(
         "SELECT n.name, u.path, s.path, s.title FROM node n
-		INNER JOIN url u ON u.id = n.id AND u.type = 'node'
-		LEFT JOIN
-			( SELECT s.id AS id, s.node_id AS node_id, s.service_title AS title, u_s.path AS path FROM service s
-			INNER JOIN url u_s ON s.id = u_s.id AND u_s.type = 'service'
-			WHERE s.name = ? ) AS s ON n.id = s.node_id
-		WHERE n.grp_id = ?
-		ORDER BY n.name, s.title ASC"
+                INNER JOIN url u ON u.id = n.id AND u.type = 'node'
+                LEFT JOIN
+                        ( SELECT s.id AS id, s.node_id AS node_id, s.service_title AS title, u_s.path AS path FROM service s
+                        INNER JOIN url u_s ON s.id = u_s.id AND u_s.type = 'service'
+                        WHERE s.name = ? ) AS s ON n.id = s.node_id
+                WHERE n.grp_id = ?
+                ORDER BY n.name, s.title ASC"
     );
 
     my %category = (
@@ -802,13 +802,13 @@ sub _get_params_services_by_name {
     # XXX this may be slow
     my $sth = $dbh->prepare_cached(
 "SELECT s.id, s.service_title as service_title, s.subgraphs as subgraphs, u.path AS url,
-		n.name AS node_name, u_n.path AS node_url
-		FROM service s
-		INNER JOIN url u ON u.id = s.id AND u.type = 'service'
-		INNER JOIN node n ON n.id = s.node_id
-		INNER JOIN url u_n ON u_n.id = s.node_id AND u_n.type = 'node'
-		WHERE s.name = ?
-		ORDER BY node_name ASC"
+                n.name AS node_name, u_n.path AS node_url
+                FROM service s
+                INNER JOIN url u ON u.id = s.id AND u.type = 'service'
+                INNER JOIN node n ON n.id = s.node_id
+                INNER JOIN url u_n ON u_n.id = s.node_id AND u_n.type = 'node'
+                WHERE s.name = ?
+                ORDER BY node_name ASC"
     );
     $sth->execute($service_name);
 
@@ -847,13 +847,13 @@ sub _get_params_services {
 
     my $sth = $dbh->prepare_cached(
 "SELECT s.id, s.name, s.service_title as service_title, s.subgraphs as subgraphs, u.path AS url,
-									(SELECT MAX(warning) FROM ds WHERE service_id = s.id) as state_warning,
-									(SELECT MAX(critical) FROM ds WHERE service_id = s.id) as state_critical
-		FROM service s
-		INNER JOIN service_categories sa_c ON sa_c.id = s.id AND sa_c.category = ?
-		INNER JOIN url u ON u.id = s.id AND u.type = 'service'
-		WHERE s.node_id = ?
-		ORDER BY service_title ASC"
+                                                                        (SELECT MAX(warning) FROM ds WHERE service_id = s.id) as state_warning,
+                                                                        (SELECT MAX(critical) FROM ds WHERE service_id = s.id) as state_critical
+                FROM service s
+                INNER JOIN service_categories sa_c ON sa_c.id = s.id AND sa_c.category = ?
+                INNER JOIN url u ON u.id = s.id AND u.type = 'service'
+                WHERE s.node_id = ?
+                ORDER BY service_title ASC"
     );
     $sth->execute( $category_name, $node_id );
 
@@ -905,17 +905,17 @@ sub _get_params_fields {
     my ( $dbh, $service_id ) = @_;
 
     my $sth_ds = $dbh->prepare_cached( "
-		SELECT ds.name, ds.warning, ds.critical,
-		a_g.value, a_l.value, IFNULL(a_t.value, 'GAUGE'), a_w.value, a_c.value, a_i.value
-		FROM ds
-		LEFT JOIN ds_attr a_g ON ds.id = a_g.id AND a_g.name = 'graph'
-		LEFT JOIN ds_attr a_l ON ds.id = a_l.id AND a_l.name = 'label'
-		LEFT JOIN ds_attr a_t ON ds.id = a_t.id AND a_t.name = 'type'
-		LEFT JOIN ds_attr a_w ON ds.id = a_w.id AND a_w.name = 'warning'
-		LEFT JOIN ds_attr a_c ON ds.id = a_c.id AND a_c.name = 'critical'
-		LEFT JOIN ds_attr a_i ON ds.id = a_i.id AND a_i.name = 'info'
-		WHERE ds.service_id = ?
-		ORDER BY ds.id ASC" );
+                SELECT ds.name, ds.warning, ds.critical,
+                a_g.value, a_l.value, IFNULL(a_t.value, 'GAUGE'), a_w.value, a_c.value, a_i.value
+                FROM ds
+                LEFT JOIN ds_attr a_g ON ds.id = a_g.id AND a_g.name = 'graph'
+                LEFT JOIN ds_attr a_l ON ds.id = a_l.id AND a_l.name = 'label'
+                LEFT JOIN ds_attr a_t ON ds.id = a_t.id AND a_t.name = 'type'
+                LEFT JOIN ds_attr a_w ON ds.id = a_w.id AND a_w.name = 'warning'
+                LEFT JOIN ds_attr a_c ON ds.id = a_c.id AND a_c.name = 'critical'
+                LEFT JOIN ds_attr a_i ON ds.id = a_i.id AND a_i.name = 'info'
+                WHERE ds.service_id = ?
+                ORDER BY ds.id ASC" );
     $sth_ds->execute($service_id);
 
     my @fields;

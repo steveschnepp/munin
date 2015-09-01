@@ -24,7 +24,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 use strict;
 use warnings;
 
-package Munin::Master::Graph;
+package Munin::Master::Controller::Graph;
 
 use Time::HiRes;
 
@@ -63,7 +63,7 @@ my @COLOUR;
 
         #Greens Blues   Oranges Dk yel  Dk blu  Purple  lime    Reds    Gray
         qw(00CC00 0066B3 FF8000 FFCC00 330099 990099 CCFF00 FF0000 808080
-          008F00 00487D B35A00 B38F00	 6B006B 8FB300 B30000 BEBEBE
+          008F00 00487D B35A00 B38F00    6B006B 8FB300 B30000 BEBEBE
           80FF80 80C9FF FFC080 FFE680 AA80FF EE00CC FF8080
           666600 FFBFFF 00FFCC CC6699 999900
           )
@@ -224,39 +224,39 @@ m/^\/(.*)-(hour|day|week|month|year|pinpoint=(\d+),(\d+))\.(svg|json|csv|xml|png
     DEBUG "graph_printf: $graph_printf";
 
     $sth = $dbh->prepare_cached( "
-		SELECT
-			ds.name,
-			l.value,
-			rf.value,
-			rd.value,
-			ra.value,
-			rc.value,
-			gc.value,
-			gd.value,
-			pf.value,
-			ne.value,
+                SELECT
+                        ds.name,
+                        l.value,
+                        rf.value,
+                        rd.value,
+                        ra.value,
+                        rc.value,
+                        gc.value,
+                        gd.value,
+                        pf.value,
+                        ne.value,
                         (
                                 select hn.id
                                 from ds hn
                                 JOIN ds_attr hn_attr ON hn.service_id = ds.service_id AND hn_attr.value = ds.name and hn_attr.name = 'negative'
                                 where hn.service_id = ds.service_id
                         ) as negative_id,
-			s.last_epoch,
-			'dummy' as dummy
-		FROM ds
-		LEFT OUTER JOIN ds_attr l ON l.id = ds.id AND l.name = 'label'
-		LEFT OUTER JOIN ds_attr rf ON rf.id = ds.id AND rf.name = 'rrd:file'
-		LEFT OUTER JOIN ds_attr rd ON rd.id = ds.id AND rd.name = 'rrd:field'
-		LEFT OUTER JOIN ds_attr ra ON ra.id = ds.id AND ra.name = 'rrd:alias'
-		LEFT OUTER JOIN ds_attr rc ON rc.id = ds.id AND rc.name = 'rrd:cdef'
-		LEFT OUTER JOIN ds_attr gc ON gc.id = ds.id AND gc.name = 'gfx:color'
-		LEFT OUTER JOIN ds_attr gd ON gd.id = ds.id AND gd.name = 'draw'
-		LEFT OUTER JOIN ds_attr pf ON pf.id = ds.id AND pf.name = 'printf'
-		LEFT OUTER JOIN ds_attr ne ON ne.id = ds.id AND ne.name = 'negative'
-		LEFT OUTER JOIN state s ON s.id = ds.id AND s.type = 'ds'
-		WHERE ds.service_id = ?
-		ORDER BY ds.ordr ASC
-	" );
+                        s.last_epoch,
+                        'dummy' as dummy
+                FROM ds
+                LEFT OUTER JOIN ds_attr l ON l.id = ds.id AND l.name = 'label'
+                LEFT OUTER JOIN ds_attr rf ON rf.id = ds.id AND rf.name = 'rrd:file'
+                LEFT OUTER JOIN ds_attr rd ON rd.id = ds.id AND rd.name = 'rrd:field'
+                LEFT OUTER JOIN ds_attr ra ON ra.id = ds.id AND ra.name = 'rrd:alias'
+                LEFT OUTER JOIN ds_attr rc ON rc.id = ds.id AND rc.name = 'rrd:cdef'
+                LEFT OUTER JOIN ds_attr gc ON gc.id = ds.id AND gc.name = 'gfx:color'
+                LEFT OUTER JOIN ds_attr gd ON gd.id = ds.id AND gd.name = 'draw'
+                LEFT OUTER JOIN ds_attr pf ON pf.id = ds.id AND pf.name = 'printf'
+                LEFT OUTER JOIN ds_attr ne ON ne.id = ds.id AND ne.name = 'negative'
+                LEFT OUTER JOIN state s ON s.id = ds.id AND s.type = 'ds'
+                WHERE ds.service_id = ?
+                ORDER BY ds.ordr ASC
+        " );
     $sth->execute($id);
 
     # Construction of the RRD command line
@@ -290,9 +290,9 @@ m/^\/(.*)-(hour|day|week|month|year|pinpoint=(\d+),(\d+))\.(svg|json|csv|xml|png
         # $_rrdXXXX vars. Defaults will be done by munin-update.
         #
         # This will :
-        # 	- have only 1 reference on default values
-        # 	- reduce the size of the CGI part, which is good for
-        # 	  security (& sometimes performances)
+        #       - have only 1 reference on default values
+        #       - reduce the size of the CGI part, which is good for
+        #         security (& sometimes performances)
 
         # Fields inherit this field from their plugin, if not overrided
         $_printf = $graph_printf unless defined $_printf;
@@ -306,22 +306,22 @@ m/^\/(.*)-(hour|day|week|month|year|pinpoint=(\d+),(\d+))\.(svg|json|csv|xml|png
 
             # This is a virtual DS, we have to fetch the original values
             ( $_rrdfile, $_rrdfield, $_lastupdated ) = $dbh->selectrow_array( "
-				SELECT
-					rf.value,
-					rd.value,
-					st.last_epoch,
-					'dummy' as dummy
-				FROM ds
-				INNER JOIN service s ON s.id = ds.service_id AND (
-					s.name = ?
-				OR	s.path = ?
-				)
-				LEFT OUTER JOIN ds_attr rf ON rf.id = ds.id AND rf.name = 'rrd:file'
-				LEFT OUTER JOIN ds_attr rd ON rd.id = ds.id AND rd.name = 'rrd:field'
-				LEFT OUTER JOIN state st ON st.id = ds.id AND st.type = 'ds'
-				WHERE ds.name = ?
-				ORDER BY ds.ordr ASC
-			", undef, $_alias_service, $_alias_service, $_alias_ds );
+                                SELECT
+                                        rf.value,
+                                        rd.value,
+                                        st.last_epoch,
+                                        'dummy' as dummy
+                                FROM ds
+                                INNER JOIN service s ON s.id = ds.service_id AND (
+                                        s.name = ?
+                                OR      s.path = ?
+                                )
+                                LEFT OUTER JOIN ds_attr rf ON rf.id = ds.id AND rf.name = 'rrd:file'
+                                LEFT OUTER JOIN ds_attr rd ON rd.id = ds.id AND rd.name = 'rrd:field'
+                                LEFT OUTER JOIN state st ON st.id = ds.id AND st.type = 'ds'
+                                WHERE ds.name = ?
+                                ORDER BY ds.ordr ASC
+                        ", undef, $_alias_service, $_alias_service, $_alias_ds );
             DEBUG
 "($_alias_service $_alias_ds) = ($_rrdfile $_rrdfield, $_lastupdated)";
         }
@@ -521,8 +521,8 @@ m/^\/(.*)-(hour|day|week|month|year|pinpoint=(\d+),(\d+))\.(svg|json|csv|xml|png
     # implement server-side caching, but I'd rather not to.
     #
     # I think caching would be better handled via HTTP headers:
-    # 	- on the browser
-    # 	- on a caching reverse proxy, such as varnish.
+    #   - on the browser
+    #   - on a caching reverse proxy, such as varnish.
 
     use File::Temp;
     my $rrd_fh = File::Temp->new();
