@@ -1,4 +1,5 @@
-#!/usr/bin/perl -T
+package Munin::Master::Controller::Graph;
+use Mojo::Base 'Mojolicious::Controller';
 
 =begin comment
 
@@ -21,11 +22,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 =cut
 
-use strict;
-use warnings;
-
-package Munin::Master::Controller::Graph;
-
 use Time::HiRes;
 
 use POSIX;
@@ -35,7 +31,6 @@ use Munin::Master::Utils;
 use Munin::Common::Logger;
 
 use File::Basename;
-use Data::Dumper;
 
 Munin::Common::Logger::configure( level => 'debug', output => 'screen' );
 

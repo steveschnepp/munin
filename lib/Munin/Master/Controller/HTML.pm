@@ -1,7 +1,5 @@
 package Munin::Master::Controller::HTML;
-
-use strict;
-use warnings;
+use Mojo::Base 'Mojolicious::Controller';
 
 use POSIX;
 use HTML::Template::Pro;
