@@ -109,6 +109,11 @@ sub is_ext_handled {
     return defined $CONTENT_TYPES{ uc($ext) };
 }
 
+sub test {
+    my $self = shift;
+    $self->render(text => 'test ok');
+}
+
 my $watermark = "Munin " . $Munin::Common::Defaults::MUNIN_VERSION;
 
 my $cgi;

@@ -13,6 +13,11 @@ use Data::Dumper;
 
 my @times = qw(day week month year);
 
+sub test {
+    my $self = shift;
+    $self->render(text => 'test ok');
+}
+
 # Current incarnation of $cgi.
 # XXX - this is NOT thread-safe!
 my $cgi;
