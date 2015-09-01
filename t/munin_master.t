@@ -14,4 +14,8 @@ $t->get_ok('/graph/test')
     ->status_is(200)
     ->content_like(qr/test ok/i);
 
+$t->get_ok('/img/logo.png')
+    ->status_is(200)
+    ->content_type_is('image/png');
+
 done_testing();

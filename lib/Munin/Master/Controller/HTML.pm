@@ -27,38 +27,6 @@ sub handle_request {
 
     my $path = $cgi->path_info();
 
-    # Handle static page now, since there is no need to do any SQL
-    if ( $path =~ m/static\/(.+)$/ ) {
-
-        # Emit the static page
-        my $page       = $1;
-        my ($ext)      = ( $page =~ m/.*\.([^.]+)$/ );
-        my %mime_types = (
-            css  => "text/css",
-            html => "text/html",
-            png  => "image/png",
-            jpg  => "image/jpeg",
-            jpeg => "image/jpeg",
-            js   => "application/javascript",
-            svg  => "image/svg+xml",
-            svgz => "image/svg+xml",
-            gif  => "image/gif",
-        );
-
-        my $filename = get_param("staticdir") . "/$page";
-        my $fh       = new IO::File("$filename");
-
-        if ( !$fh ) {
-            print "HTTP/1.0 404 Not found\r\n";
-            return;
-        }
-
-        print "HTTP/1.0 200 OK\r\n";
-        print $cgi->header( -type => $mime_types{$ext} );
-        while ( my $line = <$fh> ) { print $line; }
-        return;
-    }
-
     my $graph_ext = $cgi->url_param("graph_ext");
     $graph_ext = "png" unless defined $graph_ext;
 

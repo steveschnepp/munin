@@ -17,6 +17,10 @@ sub startup {
   $r->get('/graph/test/')->to('graph#test');
 
   $r->get('/html/test/')->to('HTML#test');
+
+  # Switch to installable "public" directory
+  $self->static->paths->[0] = $self->home->rel_dir('web/static');
+
 }
 
 1;
