@@ -11,10 +11,6 @@ use Munin::Common::Logger;
 use File::Basename;
 use Data::Dumper;
 
-use DBI;
-
-my @times = qw(day week month year);
-
 sub welcome {
     my $self           = shift;
     my $nav_problems   = $self->_nav_problems();
@@ -126,6 +122,12 @@ sub _lookup_categories {
     my $self = shift;
     return {};
 }
+
+
+#### Old code below
+use DBI;
+
+my @times = qw(day week month year);
 
 # Current incarnation of $cgi.
 # XXX - this is NOT thread-safe!
