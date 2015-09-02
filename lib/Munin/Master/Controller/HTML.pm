@@ -27,6 +27,9 @@ sub handle_request {
 
     my $path = $cgi->path_info();
 
+    my $graph_ext;
+    my $output_format;
+
     # Ok, now SQL is needed to go further
     use DBI;
     my $datafilename = $ENV{MUNIN_DBURL}
