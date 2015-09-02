@@ -41,6 +41,7 @@ sub startup {
         }
     );
 
+    my $config = $self->plugin('Config');
 }
 
 1;

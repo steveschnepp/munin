@@ -106,7 +106,7 @@ EOT
 
     my $globalcats = [];
     while ( my ($_category) = $sth->fetchrow_array ) {
-        my %urls = map { ( "URL$_" => "$_category-$_.html" ) } @times;
+        my %urls = map { ( "URL$_" => "$_category-$_.html" ) } @{$self->config->{timeperiods}};
         push @$globalcats,
             {
             R_PATH => '',
