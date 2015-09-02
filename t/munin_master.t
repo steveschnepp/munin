@@ -7,7 +7,9 @@ my $t = Test::Mojo->new('Munin::Master');
 
 $t->get_ok('/')
     ->status_is(200)
-    ->content_like(qr/main page/i);
+    ->json_has('/nav_groups')
+    ->json_has('/nav_categories')
+    ->json_has('/nav_problems');
 
 $t->get_ok('/node')
     ->status_is(200)

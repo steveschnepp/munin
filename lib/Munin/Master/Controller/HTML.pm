@@ -16,8 +16,17 @@ use DBI;
 my @times = qw(day week month year);
 
 sub welcome {
-    my $self = shift;
-    $self->render(text => 'main page');
+    my $self           = shift;
+    my $nav_problems   = $self->_nav_problems();
+    my $nav_categories = $self->_nav_categories();
+    my $nav_groups     = $self->_nav_groups();
+    $self->render(
+        json => {
+            nav_problems   => $nav_problems,
+            nav_categories => $nav_categories,
+            nav_groups     => $nav_groups,
+        }
+    );
 }
 
 sub problems {
@@ -43,6 +52,71 @@ sub service {
 sub group {
     my $self = shift;
     $self->render(text => 'group page');
+}
+
+sub _nav_problems {
+    my $self = shift;
+
+    my $query = << 'EOQ';
+SELECT
+ SUM(critical) AS NCRITICALS,
+ SUM(warning) AS NWARNINGS,
+ SUM(unknown) AS NUNKNOWNS
+FROM ds;
+EOQ
+
+    my $sth = $self->db->prepare_cached($query);
+    $sth->execute();
+    my ($thing) = $sth->fetchall_arrayref( {} );
+    return $thing;
+}
+
+sub _nav_groups {
+    my $self = shift;
+
+    my $query = << 'FOO';
+SELECT
+ g.name,
+ u.path
+FROM
+ grp g INNER JOIN
+ url u ON u.id = g.id AND u.type = 'group'
+WHERE g.p_id IS NULL
+ORDER BY g.name ASC
+FOO
+
+    my $sth = $self->db->prepare_cached($query);
+    $sth->execute();
+    my $rootgroups = [];
+    while ( my ( $_name, $_path ) = $sth->fetchrow_array ) {
+        push @$rootgroups, { NAME => $_name, R_PATH => '', URL => $_path };
+    }
+    return $rootgroups;
+}
+
+sub _nav_categories {
+    my $self = shift;
+
+    my $query = << 'EOT';
+SELECT DISTINCT category
+FROM service_categories
+ORDER BY category ASC
+EOT
+
+    my $sth = $self->db->prepare_cached($query);
+    $sth->execute();
+
+    my $globalcats = [];
+    while ( my ($_category) = $sth->fetchrow_array ) {
+        my %urls = map { ( "URL$_" => "$_category-$_.html" ) } @times;
+        push @$globalcats,
+            {
+            R_PATH => '',
+            NAME   => $_category,
+            %urls,
+            };
+    }
+    return $globalcats;
 }
 
 sub _lookup_groups {
