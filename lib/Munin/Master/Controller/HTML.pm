@@ -15,9 +15,44 @@ use DBI;
 
 my @times = qw(day week month year);
 
-sub test {
+sub welcome {
     my $self = shift;
-    $self->render(text => 'test ok');
+    $self->render(text => 'main page');
+}
+
+sub problems {
+    my $self = shift;
+    $self->render(text => 'problems page');
+}
+
+sub comparison {
+    my $self = shift;
+    $self->render(text => 'comparison page');
+}
+
+sub node {
+    my $self = shift;
+    $self->render(text => 'node page');
+}
+
+sub service {
+    my $self = shift;
+    $self->render(text => 'service page');
+}
+
+sub group {
+    my $self = shift;
+    $self->render(text => 'group page');
+}
+
+sub _lookup_groups {
+    my $self = shift;
+    return {};
+}
+
+sub _lookup_categories {
+    my $self = shift;
+    return {};
 }
 
 # Current incarnation of $cgi.
