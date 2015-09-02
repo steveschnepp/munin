@@ -7,9 +7,21 @@ my $t = Test::Mojo->new('Munin::Master');
 
 $t->get_ok('/')
     ->status_is(200)
-    ->json_has('/nav_groups')
     ->json_has('/nav_categories')
-    ->json_has('/nav_problems');
+    ->json_has('/nav_categories/0/NAME')
+    ->json_has('/nav_categories/0/R_PATH')
+    ->json_has('/nav_categories/0/URLday')
+    ->json_has('/nav_categories/0/URLmonth')
+    ->json_has('/nav_categories/0/URLweek')
+    ->json_has('/nav_categories/0/URLyear')
+    ->json_has('/nav_groups')
+    ->json_has('/nav_groups/0/NAME')
+    ->json_has('/nav_groups/0/R_PATH')
+    ->json_has('/nav_groups/0/URL')
+    ->json_has('/nav_problems')
+    ->json_has('/nav_problems/0/NCRITICALS')
+    ->json_has('/nav_problems/0/NUNKNOWNS')
+    ->json_has('/nav_problems/0/NWARNINGS');
 
 $t->get_ok('/node')
     ->status_is(200)
