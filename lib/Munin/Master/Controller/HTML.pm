@@ -76,8 +76,9 @@ sub _nav_groups {
 
     my $query = << 'FOO';
 SELECT
- g.name,
- u.path
+ g.name AS NAME,
+ u.path AS URL,
+ '' AS R_PATH
 FROM
  grp g INNER JOIN
  url u ON u.id = g.id AND u.type = 'group'
@@ -87,10 +88,7 @@ FOO
 
     my $sth = $self->db->prepare_cached($query);
     $sth->execute();
-    my $rootgroups = [];
-    while ( my ( $_name, $_path ) = $sth->fetchrow_array ) {
-        push @$rootgroups, { NAME => $_name, R_PATH => '', URL => $_path };
-    }
+    my $rootgroups = $sth->fetchall_arrayref( {} );
     return $rootgroups;
 }
 
