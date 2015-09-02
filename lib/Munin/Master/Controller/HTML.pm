@@ -554,18 +554,6 @@ sub handle_request {
             loop_context_vars => 1,
         );
 
-        my $is_dump_enabled = $cgi->url_param("dump");
-        if ($is_dump_enabled) {
-            use Data::Dumper;
-            local $Data::Dumper::Terse      = 1;
-            local $Data::Dumper::Sortkeys   = 1;
-            local $Data::Dumper::Sparseseen = 1;
-            local $Data::Dumper::Deepcopy   = 1;
-            local $Data::Dumper::Indent     = 1;
-
-            $template_params{DEBUG} = Dumper( \%template_params );
-        }
-
         $template->param(%template_params);
 
     # We cannot use "print_to => \*STDOUT" since it does *NOT* work with FastCGI
