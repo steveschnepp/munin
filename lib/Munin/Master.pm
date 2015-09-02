@@ -28,9 +28,11 @@ sub startup {
     # Switch to installable "public" directory
     $self->static->paths->[0] = $self->home->rel_dir('web/static');
 
+    my $config = $self->plugin('Config');
+
     $self->helper(
         'db' => sub {
-            my $dbfile = $self->home->rel_dir('t/fixtures/datafile.sqlite');
+            my $dbfile = $self->config->{dbfile};
             state $dbh = DBI->connect(
                 "dbi:SQLite:$dbfile",
                 undef, undef,
@@ -40,8 +42,6 @@ sub startup {
             );
         }
     );
-
-    my $config = $self->plugin('Config');
 }
 
 1;
