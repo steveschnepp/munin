@@ -25,7 +25,7 @@ sub startup {
     # Simple test routes
     $r->get('/graph/test/')->to('graph#test');
 
-    # Switch to installable "public" directory
+    # Where to serve static files from
     $self->static->paths->[0] = $self->home->rel_dir('web/static');
 
     my $config = $self->plugin('Config');
