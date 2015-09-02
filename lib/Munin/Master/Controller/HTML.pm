@@ -27,37 +27,6 @@ sub handle_request {
 
     my $path = $cgi->path_info();
 
-    my $graph_ext = $cgi->url_param("graph_ext");
-    $graph_ext = "png" unless defined $graph_ext;
-
-    # Handle rest-like URL : .json & .xml
-    my $output_format = "html";
-    if ( $path =~ /.(json|xml)$/ ) {
-        $output_format = $1;
-
-       # Replace that part with a ".html" in order to simplify the next handling
-        $path =~ s/.(json|xml)$/.html/;
-    }
-
-# Force either a trailing "/" or ".html" to enable simpler url handling: it is like in
-# a subdir from the browser pov
-    if ( $path eq "" || $path !~ /(\/|\.html)$/ ) {
-
-        #if ($path eq "") {
-        print "HTTP/1.0 301 Redirect Permanent\r\n";
-        print $cgi->header(
-            -Location => ( $cgi->url( -path_info => 1, -query => 1 ) . "/" ),
-            -Cache_Control => "public, max-age=14400", # Cache is valid of 1 day
-        );
-        return;
-    }
-
-    # Remove now the leading "/" as *every* path will have it
-    $path =~ s,^/,,;
-
-    # Remove now the ending "/" as *every* dir will have it
-    $path =~ s,/$,,;
-
     # Ok, now SQL is needed to go further
     use DBI;
     my $datafilename = $ENV{MUNIN_DBURL}
