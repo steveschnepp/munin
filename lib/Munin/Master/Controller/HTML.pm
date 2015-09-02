@@ -11,6 +11,8 @@ use Munin::Common::Logger;
 use File::Basename;
 use Data::Dumper;
 
+use DBI;
+
 my @times = qw(day week month year);
 
 sub test {
@@ -31,7 +33,6 @@ sub handle_request {
     my $output_format;
 
     # Ok, now SQL is needed to go further
-    use DBI;
     my $datafilename = $ENV{MUNIN_DBURL}
       || "$Munin::Common::Defaults::MUNIN_DBDIR/datafile.sqlite";
     my $dbh = DBI->connect( "dbi:SQLite:dbname=$datafilename", "", "" )
