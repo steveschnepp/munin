@@ -19,6 +19,7 @@ cat <<EOF
   liblist-moreutils-perl
   liblog-dispatch-perl
   libmodule-build-perl
+  libmojolicious-perl
   libnet-dns-perl
   libnet-ip-perl
   libnet-server-perl
