@@ -1,0 +1,100 @@
+#! /bin/sh
+# Autobuilding script : Git -> debian packages
+# (c) GPL - Steve Schnepp <steve.schnepp@pwkf.org>
+
+# Has to be launched from the upper svn dir. 
+# The dir structure should be like :  
+# trunk/
+# debian/
+# trunk/debian -> ../debian
+# packages/
+
+# Stopping on error
+set -e
+
+# We don't want localized mesgs
+LANG=C
+
+OLDREVISION=$(cd trunk && git rev-parse HEAD)
+[ -z "$NO_UPDATE" ] && (
+        cd trunk && git fetch --prune origin && git merge origin/devel
+        # remove debian-like tags
+        git tag | perl -lne 'print if /-(\d+)$/' | xargs -n1 git tag -d
+) 2>&1
+
+REVISION=$(cd trunk && git rev-parse HEAD)
+
+UPSTREAM=$(cd trunk && ./getversion | tr '-' '-')
+VERSION="${UPSTREAM}-999"
+
+
+if [ -z "$NO_UPDATE" -a "$OLDREVISION" = "$REVISION" ]
+then
+	echo "Nothing to do, ${UPSTREAM} ($REVISION) is the oldest"	
+	exit 1
+fi
+
+# Creating temp source dir ...
+(cd trunk && git archive --format=tar debianauto --prefix=munin-${UPSTREAM}/ ) | tar x
+
+# ... and go there
+cd munin-${UPSTREAM}
+echo ${UPSTREAM} > RELEASE
+
+TMPFILE=$(mktemp)
+
+# Something has changed, building the changelog, from trunk
+(
+	cd ../trunk
+	printf "munin ($VERSION) experimental; urgency=low\n"
+	printf "\n" 
+	printf "  * Somewhat daily build from devel\n"
+	printf "  * Authors:\n";
+	[ -z "$NO_UPDATE" ] && git shortlog $OLDREVISION..$REVISION | perl -lne 'if (/^(\w[^(]+)/) { $a = $1; $a =~ s/ +$//; print "    $a" }'
+	printf "  * Commit log:\n";
+	[ -z "$NO_UPDATE" ] && git log --graph --no-merges --oneline $OLDREVISION..$REVISION | perl -lne 'print "    $_"'
+	printf "\n"
+	printf " -- Steve Schnepp <steve.schnepp@munin-monitoring.org>  "
+	date --rfc-822
+	printf "\n"
+) >> $TMPFILE
+
+# send the new log to stderr, for cron
+cat $TMPFILE 1>&2
+
+# Create a new one
+( cat debian/changelog >> $TMPFILE ) && cat $TMPFILE > debian/changelog
+
+# Remove temp changelog
+rm -f $TMPFILE
+
+# Building....
+mkdir -p ../logs
+( 
+	echo $(date) " - START - Building package $VERSION"
+	dpkg-buildpackage -us -uc -F -tc "$@" 2>&1
+	echo $(date) " - STOP - Building package $VERSION - retcode : $!"
+) >> ../logs/dpkg-buildpackage-$VERSION.log 
+
+# Back to trunk
+cd ..
+
+# Cleanup temp build directory
+rm -Rf munin-${UPSTREAM}
+
+DEB_ARCH=$(dpkg --print-architecture)
+if [ -r "munin_${VERSION}_${DEB_ARCH}.changes" ]
+then  
+	# Moving everything in packages/ and prepare it for upload
+	mkdir -p packages/munin
+	[ -r packages/override ] || touch packages/override
+
+	cd packages
+	mv ../*${VERSION}*.deb munin/
+	mv ../*${VERSION}*.dsc munin/
+	mv ../*${VERSION}*.tar.gz munin/
+	mv ../*${VERSION}*.changes .
+
+	dpkg-scanpackages -m munin override > Packages 2>&1
+	bzip2 -9 < Packages > Packages.bz2
+fi
