@@ -25,9 +25,12 @@ OLDREVISION=$(cd trunk && git rev-parse HEAD)
 
 REVISION=$(cd trunk && git rev-parse HEAD)
 
+# Temporary disable RELEASE
+mv trunk/RELEASE trunk/RELEASE.disabled
 UPSTREAM=$(cd trunk && ./getversion | tr '-' '-')
 VERSION="${UPSTREAM}-999"
-
+# Reenable RELEASE
+mv trunk/RELEASE.disabled trunk/RELEASE
 
 if [ -z "$NO_UPDATE" -a "$OLDREVISION" = "$REVISION" ]
 then
