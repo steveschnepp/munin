@@ -19,6 +19,7 @@ OLDREVISION=$(cd trunk && git rev-parse HEAD)
 [ -z "$NO_UPDATE" ] && (
 	cd trunk
 	git fetch --prune origin
+	git fetch --prune alioth
 	git merge --no-edit origin/devel
 	git merge --no-edit alioth/debian-experimental
 	# remove debian-like tags
