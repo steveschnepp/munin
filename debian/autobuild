@@ -17,10 +17,13 @@ LANG=C
 
 OLDREVISION=$(cd trunk && git rev-parse HEAD)
 [ -z "$NO_UPDATE" ] && (
-        cd trunk && git fetch --prune origin && git merge origin/devel && git merge alioth/debian-experimental
-        # remove debian-like tags
-        git tag | perl -lne 'print if /-(\d+)$/' | xargs -n1 git tag -d
-        git tag | fgrep "upstream/" | xargs -n1 git tag -d
+	cd trunk
+	git fetch --prune origin
+	git merge origin/devel
+	git merge alioth/debian-experimental
+	# remove debian-like tags
+	git tag | perl -lne 'print if /-(\d+)$/' | xargs -n1 git tag -d
+	git tag | fgrep "upstream/" | xargs -n1 git tag -d
 ) 2>&1
 
 REVISION=$(cd trunk && git rev-parse HEAD)
