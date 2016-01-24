@@ -45,6 +45,9 @@ fi
 cd munin-${UPSTREAM}
 echo ${UPSTREAM} > RELEASE
 
+# Create the .orig.tar.gz tarball
+(cd .. && tar zcvf munin_${UPSTREAM}.orig.tar.gz munin-${UPSTREAM})
+
 TMPFILE=$(mktemp)
 
 # Something has changed, building the changelog, from trunk
