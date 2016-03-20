@@ -6,4 +6,4 @@ set -u
 FINDBIN=$(cd -- "$(dirname "$0")" && pwd)
 . "${FINDBIN}/common.sh"
 
-rm -vf "${SANDBOX}/etc/munin-conf.d/rrdcached.conf"
+rm -vf "${SANDBOX}/etc/munin.conf.d/rrdcached.conf"

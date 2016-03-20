@@ -6,6 +6,6 @@ set -u
 FINDBIN=$(cd -- "$(dirname "$0")" && pwd)
 . "${FINDBIN}/common.sh"
 
-cat > "${SANDBOX}/etc/munin-conf.d/rrdcached.conf" <<EOF
+cat > "${SANDBOX}/etc/munin.conf.d/rrdcached.conf" <<EOF
 rrdcached_socket ${SANDBOX}/var/run/rrdcached.sock
 EOF

@@ -12,7 +12,7 @@ my $rundir     = $build->install_path('MUNIN_RUNDIR');
 my $tmpldir    = $build->install_path('MUNIN_CONFDIR') . '/templates';
 my $staticdir  = $build->install_path('MUNIN_CONFDIR') . '/static';
 my $cgitmpdir  = $build->install_path('MUNIN_CGITMPDIR');
-my $includedir = $build->install_path('MUNIN_CONFDIR') . '/munin-conf.d';
+my $includedir = $build->install_path('MUNIN_CONFDIR') . '/munin.conf.d';
 
 my $output_file = shift;
 open my $fh, ">", $output_file or die "Can't open $output_file: $!";

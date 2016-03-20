@@ -111,7 +111,7 @@ background.
 
 .. code-block:: bash
 
-   contrib/munin-node-debug -d  > sandbox/etc/munin-conf.d/nodes.debug
+   contrib/munin-node-debug -d  > sandbox/etc/munin.conf.d/nodes.debug
    contrib/munin-node-debug &
 
 Start a munin-update loop.  Normally, munin-update runs from cron
