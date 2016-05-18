@@ -300,9 +300,9 @@ sub _dump_conf_node_into_sql {
 				# graph config
 
 				# Category names should not be case sensitive. Store them all in lowercase.
-				if ($attr->[0] eq 'graph_category') {
-						$attr->[1] = lc($attr->[1]);
-						$sth_service_category->execute($service_id, $attr->[1]);
+				if ($args[0] eq 'graph_category') {
+						$value = lc($value);
+						$sth_service_category->execute($service_id, $value);
 				} else {
 						$sth_service_attr->execute($service_id, $args[0], $value);
 				}
