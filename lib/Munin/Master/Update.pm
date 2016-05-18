@@ -278,8 +278,9 @@ sub _dump_conf_node_into_sql {
 	for my $service (@services) {
 		$service = substr $service, 0, -12;
 
-		# Insert graph
-		$sth_service->execute($node_id, $service, "$node_path:$service");
+		# Insert graph with NULL values
+		my ($graph_title, $graph_info, $subgraphs);
+		$sth_service->execute($node_id, $service, "$node_path:$service", $graph_title, $graph_info, $subgraphs);
 		my $service_id = _get_last_insert_id($dbh);
 
 		# Replace '.' delimiter in graph name to '/' for URLs
