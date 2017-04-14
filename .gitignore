@@ -29,6 +29,9 @@ local/
 # IDE files
 .idea/
 
+# Vagrant
+/.vagrant/
+
 # CSS SASS files
 *.sass-cache*
 *.css.map
