@@ -52,22 +52,6 @@ sub configure {
     # Uses default file if config_file is not defined by arguments.
     $config->parse_config_from_file($args{config});
 
-    if (defined $config->{'includedir'}) {
-	my $dirname = $config->{'includedir'};
-
-	my $DIR;
-	opendir($DIR, $dirname) or
-	    WARN "[Warning] Could not open includedir directory $dirname: $OS_ERROR\n";
-	my @files = grep { ! /^\.|~$/ } readdir($DIR);
-	closedir($DIR);
-
-	@files = map { $_ = $dirname.'/'.$_; } (sort @files);
-
-	foreach my $f (@files) {
-	    $config->parse_config_from_file($f);
-	}
-    }
-
     # Arguments overrides settings from config file.  Note that
     # this only handles settings that are on the base level, not
     # anything within groups or hosts.

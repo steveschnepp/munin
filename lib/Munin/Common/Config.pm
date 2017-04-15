@@ -179,6 +179,23 @@ sub parse_config_from_file {
 
     close $file
         or croak "Cannot close '$config_file': $OS_ERROR";
+
+    # Recurse with includedir
+    if (defined $self->{'includedir'}) {
+	my $dirname = $self->{'includedir'};
+
+	my $DIR;
+	opendir($DIR, $dirname) or
+	    WARN "[Warning] Could not open includedir directory $dirname: $OS_ERROR\n";
+	my @files = grep { ! /^\.|~$/ } readdir($DIR);
+	closedir($DIR);
+
+	@files = map { $_ = $dirname.'/'.$_; } (sort @files);
+
+	foreach my $f (@files) {
+	    $self->parse_config_from_file($f);
+	}
+    }
 }
 
 
