@@ -7,6 +7,10 @@ use File::Temp qw(tempdir);
 
 use Munin::Master::Update;
 use Munin::Master::Config;
+use Munin::Common::Logger;
+
+use Carp;
+$Carp::Verbose = 1;
 
 sub setup : Test(setup) {
     my $self = shift;
@@ -44,7 +48,16 @@ sub method__run : Test(3) {
     $mock_rrds->mock('error',  sub { });
 
     $mock_node = Test::MockModule->new("Munin::Master::Node");
-    $mock_node->mock('do_in_session', sub { my ($self, $block) = @_; return { exit_value => $block->() }; });
+    $mock_node->mock('_do_connect', undef );
+    $mock_node->mock('_do_close', undef );
+    $mock_node->mock('negotiate_capabilities', sub { return ( "multigraph", ) });
+    $mock_node->mock('negotiate_capabilities', sub { return ( "multigraph", ) });
+    $mock_node->mock('list_plugins', sub { return ("a", "b", "c", ) });
+    $mock_node->mock('fetch_service_config', sub {
+		    my ($self, $service, $uw_handle_config) = @_;
+		    DEBUG "[DEBUG] Mocking service configuration for '$service'";
+	    });
+    $mock_node->mock('fetch_service_data', sub { });
 
     my $config = Munin::Master::Config->instance()->{config};
     $config->{dbdir}  = tempdir( CLEANUP => 1 );
