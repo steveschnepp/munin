@@ -6,6 +6,7 @@ use strict;
 
 use Carp;
 use English qw(-no_match_vars);
+use Munin::Common::Logger;
 
 # Functions here are unable to log as they don't know if they're used
 # by the node or the master which use divergent logging facilities.
@@ -166,6 +167,7 @@ sub parse_config_from_file {
 
     $config_file ||= $self->{config_file};
 
+    INFO "[INFO] reading config file $config_file";
     open my $file, '<', $config_file
         or croak "ERROR: Cannot open '$config_file': $OS_ERROR";
 
@@ -183,16 +185,21 @@ sub parse_config_from_file {
     # Recurse with includedir
     if (defined $self->{'includedir'}) {
 	my $dirname = $self->{'includedir'};
+	delete $self->{'includedir'};
+
+	INFO "[INFO] reading config files from $dirname";
+	print STDERR "[INFO] reading config files from $dirname";
 
 	my $DIR;
 	opendir($DIR, $dirname) or
-	    WARN "[Warning] Could not open includedir directory $dirname: $OS_ERROR\n";
+	     WARN "[Warning] Could not open includedir directory $dirname: $OS_ERROR\n";
 	my @files = grep { ! /^\.|~$/ } readdir($DIR);
 	closedir($DIR);
 
 	@files = map { $_ = $dirname.'/'.$_; } (sort @files);
 
 	foreach my $f (@files) {
+		INFO "[INFO] reading config file $f";
 	    $self->parse_config_from_file($f);
 	}
     }
