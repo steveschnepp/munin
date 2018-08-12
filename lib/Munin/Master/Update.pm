@@ -79,7 +79,12 @@ sub get_dbh {
 		$dbh->{RaiseError} = 1;
 		use Carp;
 		$dbh->{HandleError} = sub { confess(shift) };
-	 }
+	}
+
+	# Silence some PG warnings
+	if ($db_driver eq "Pg") {
+		$dbh->do("SET client_min_messages = error");
+	}
 
 
 	# Plainly returns it, but do *not* put it in $self, as it will let Perl
