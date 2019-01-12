@@ -5,7 +5,7 @@ Documentation=man:munin http://guide.munin-monitoring.org/en/latest/reference/mu
 [Service]
 Type=simple
 Restart=always
-User=munin
+User=munin-httpd
 ExecStart=/usr/bin/munin-httpd
 PrivateDevices=true
 PrivateNetwork=false
