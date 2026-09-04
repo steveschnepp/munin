@@ -1,0 +1,2032 @@
+STEP 1/7: FROM debian:bookworm
+STEP 2/7: RUN apt-get update && apt-get install -y     build-essential     perl     libmodule-build-perl     libdbi-perl     libdbd-sqlite3-perl     libdbd-pg-perl     libhtml-template-pro-perl     libhttp-server-simple-cgi-prefork-perl     libjson-perl     libwww-perl     liblog-dispatch-perl     libnet-snmp-perl     libnet-server-perl     libparallel-forkmanager-perl     libparams-validate-perl     libxml-dumper-perl     libxml-libxml-perl     libxml-parser-perl     libtest-most-perl     libtest-differences-perl     libtest-deep-perl     libtest-mockmodule-perl     libtest-mockobject-perl     libtest-exception-perl     libfile-slurp-perl     librrds-perl     libssl-dev     codespell     shellcheck     && rm -rf /var/lib/apt/lists/*
+--> Using cache 338bf176695a162de742bf1b1c0e4281215138d37f6e1e5987ab4ceeb8e97b88
+--> 338bf176695a
+STEP 3/7: WORKDIR /app
+--> Using cache 8a33c5a817f362237097b0f5bcb8dc7cca1ad6c4df796cb522d785e8b8e363e0
+--> 8a33c5a817f3
+STEP 4/7: COPY . .
+--> 0c8c719ea4b4
+STEP 5/7: RUN perl Build.PL --install_base /app/sandbox && ./Build install
+Checking prerequisites...
+  test_requires:
+    !  Devel::Confess is not installed
+    !  Directory::Scratch is not installed
+    !  File::ReadBackwards is not installed
+    !  Net::DNS is not installed
+    !  Net::IP is not installed
+    !  Test::Class is not installed
+    !  Test::LongString is not installed
+    !  Test::Perl::Critic is not installed
+
+ERRORS/WARNINGS FOUND IN PREREQUISITES.  You may wish to install the versions
+of the modules indicated above before proceeding with this installation
+
+Run 'Build installdeps' to install missing prerequisites.
+
+Added to MANIFEST: .codespell.exclude
+Added to MANIFEST: .codespell.ignore-words
+Added to MANIFEST: .dockerignore
+Added to MANIFEST: .flake8
+Added to MANIFEST: .gitattributes
+Added to MANIFEST: .github/dependabot.yml
+Added to MANIFEST: .github/ISSUE_TEMPLATE/bug_report.md
+Added to MANIFEST: .github/ISSUE_TEMPLATE/feature_request.md
+Added to MANIFEST: .github/workflows/build-n-test.yml
+Added to MANIFEST: .perlcriticrc
+Added to MANIFEST: .perltidyrc
+Added to MANIFEST: .readthedocs.yaml
+Added to MANIFEST: Announce-2.0
+Added to MANIFEST: authors
+Added to MANIFEST: Build.PL
+Added to MANIFEST: ChangeLog
+Added to MANIFEST: Checklist
+Added to MANIFEST: contrib/drop.sql
+Added to MANIFEST: contrib/dump_storable
+Added to MANIFEST: contrib/epoch2localtime
+Added to MANIFEST: contrib/export-palette-to-svg
+Added to MANIFEST: contrib/install_rrd.sh
+Added to MANIFEST: contrib/munin-node-debug
+Added to MANIFEST: contrib/munin-support-info
+Added to MANIFEST: contrib/percentile
+Added to MANIFEST: contrib/perf/rrd_perf.pl
+Added to MANIFEST: contrib/perf/test_weak.pl
+Added to MANIFEST: contrib/plugin-gallery/COPYING
+Added to MANIFEST: contrib/plugin-gallery/gallery-build.sh
+Added to MANIFEST: contrib/plugin-gallery/grep-files.excl
+Added to MANIFEST: contrib/plugin-gallery/include-graphs.awk
+Added to MANIFEST: contrib/plugin-gallery/INSTALL
+Added to MANIFEST: contrib/plugin-gallery/print-gallery.awk
+Added to MANIFEST: contrib/plugin-gallery/split-greplist.awk
+Added to MANIFEST: contrib/plugin-gallery/static/gallery-cat-footer.html
+Added to MANIFEST: contrib/plugin-gallery/static/gallery-cat-header.html
+Added to MANIFEST: contrib/plugin-gallery/static/gallery-footer.html
+Added to MANIFEST: contrib/plugin-gallery/static/gallery-header.html
+Added to MANIFEST: contrib/plugin-gallery/static/gallery-intro-contrib.html
+Added to MANIFEST: contrib/plugin-gallery/static/gallery-intro.html
+Added to MANIFEST: contrib/plugin-gallery/static/leer.html
+Added to MANIFEST: contrib/plugin-gallery/static/leer.pod
+Added to MANIFEST: contrib/plugin-gallery/well-known-categories.incl
+Added to MANIFEST: contrib/plugin-gallery/www/static/css/_responsive.scss
+Added to MANIFEST: contrib/plugin-gallery/www/static/css/style-doc.css
+Added to MANIFEST: contrib/plugin-gallery/www/static/css/style-doc.scss
+Added to MANIFEST: contrib/plugin-gallery/www/static/css/style.css
+Added to MANIFEST: contrib/plugin-gallery/www/static/css/style.scss
+Added to MANIFEST: contrib/plugin-gallery/www/static/img/download.gif
+Added to MANIFEST: contrib/plugin-gallery/www/static/img/favicon.ico
+Added to MANIFEST: contrib/plugin-gallery/www/static/img/glyphicons-208-remove-2-white.png
+Added to MANIFEST: contrib/plugin-gallery/www/static/img/glyphicons-390-new-window-alt-white.png
+Added to MANIFEST: contrib/plugin-gallery/www/static/img/logo-h-neg.png
+Added to MANIFEST: contrib/plugin-gallery/www/static/img/logo-h-neg.svg
+Added to MANIFEST: contrib/plugin-gallery/www/static/js/jquery-3.7.1.min.js
+Added to MANIFEST: contrib/plugin-gallery/www/static/js/script.js
+Added to MANIFEST: contrib/python-plugin/arp
+Added to MANIFEST: contrib/python-plugin/munin.py
+Added to MANIFEST: contrib/python-plugin/README
+Added to MANIFEST: contrib/python-plugin/setup.py
+Added to MANIFEST: contrib/python-plugin/test.py
+Added to MANIFEST: contrib/rrdcopy
+Added to MANIFEST: contrib/rtbtrace.pl
+Added to MANIFEST: CONTRIBUTING.md
+Added to MANIFEST: COPYING
+Added to MANIFEST: cpanfile
+Added to MANIFEST: dev_scripts/all
+Added to MANIFEST: dev_scripts/common.sh
+Added to MANIFEST: dev_scripts/deps
+Added to MANIFEST: dev_scripts/disable_rrdcached
+Added to MANIFEST: dev_scripts/disable_taint
+Added to MANIFEST: dev_scripts/disable_tls
+Added to MANIFEST: dev_scripts/dump_sql
+Added to MANIFEST: dev_scripts/empty_db.sql
+Added to MANIFEST: dev_scripts/enable_rrdcached
+Added to MANIFEST: dev_scripts/enable_tls
+Added to MANIFEST: dev_scripts/install
+Added to MANIFEST: dev_scripts/nested-munin.conf.sample
+Added to MANIFEST: dev_scripts/noop
+Added to MANIFEST: dev_scripts/plugin
+Added to MANIFEST: dev_scripts/query_munin_node
+Added to MANIFEST: dev_scripts/README.md
+Added to MANIFEST: dev_scripts/restart_munin-node
+Added to MANIFEST: dev_scripts/run
+Added to MANIFEST: dev_scripts/run_debug_node
+Added to MANIFEST: dev_scripts/start_munin-httpd
+Added to MANIFEST: dev_scripts/start_munin-node
+Added to MANIFEST: dev_scripts/start_munin-sched
+Added to MANIFEST: dev_scripts/start_rrdcached
+Added to MANIFEST: dev_scripts/stop_munin-node
+Added to MANIFEST: dev_scripts/stop_munin-sched
+Added to MANIFEST: dists/README
+Added to MANIFEST: doc/advanced/custom-rrd-sizing.rst
+Added to MANIFEST: doc/advanced/index.rst
+Added to MANIFEST: doc/advanced/network.rst
+Added to MANIFEST: doc/advanced/tls-setup.rst
+Added to MANIFEST: doc/architecture/api.rst
+Added to MANIFEST: doc/architecture/index.rst
+Added to MANIFEST: doc/architecture/munin-c.rst
+Added to MANIFEST: doc/architecture/protocol.rst
+Added to MANIFEST: doc/architecture/syntax.rst
+Added to MANIFEST: doc/conf.py
+Added to MANIFEST: doc/develop/data_structures.rst
+Added to MANIFEST: doc/develop/documenting.rst
+Added to MANIFEST: doc/develop/environment.rst
+Added to MANIFEST: doc/develop/index.rst
+Added to MANIFEST: doc/develop/plugins/advanced-topics.rst
+Added to MANIFEST: doc/develop/plugins/graphs/if_eth0-week.png
+Added to MANIFEST: doc/develop/plugins/graphs/localhost.localdomain-load-day.png
+Added to MANIFEST: doc/develop/plugins/howto-write-plugins.rst
+Added to MANIFEST: doc/develop/plugins/howto-write-snmp-plugins.rst
+Added to MANIFEST: doc/develop/plugins/index.rst
+Added to MANIFEST: doc/develop/plugins/plugin-bcp.rst
+Added to MANIFEST: doc/develop/plugins/plugin-concise.rst
+Added to MANIFEST: doc/develop/plugins/plugin-gallery.rst
+Added to MANIFEST: doc/develop/plugins/requirements-vetted.rst
+Added to MANIFEST: doc/develop/tests.rst
+Added to MANIFEST: doc/example/graph/aggregate.rst
+Added to MANIFEST: doc/example/graph/aggregate/aggregate_current.png
+Added to MANIFEST: doc/example/graph/aggregate/aggregate_power.png
+Added to MANIFEST: doc/example/graph/aggregate/temperatures-day.png
+Added to MANIFEST: doc/example/graph/aggregate/ups-5a_current.png
+Added to MANIFEST: doc/example/graph/aggregate/ups-5a_power.png
+Added to MANIFEST: doc/example/graph/aggregated-stack.rst
+Added to MANIFEST: doc/example/graph/aggregation-combined.rst
+Added to MANIFEST: doc/example/graph/graph_args.rst
+Added to MANIFEST: doc/example/graph/percent-graph.rst
+Added to MANIFEST: doc/example/graph/percent/donald.hjemme.ruberg.no-conntrack_percent-day.png
+Added to MANIFEST: doc/example/graph/percent/donald.hjemme.ruberg.no-fw_conntrack-day.png
+Added to MANIFEST: doc/example/graph/stack/postfix_mailstats-year.png
+Added to MANIFEST: doc/example/graph/stack/total_mailstats-year.png
+Added to MANIFEST: doc/example/index.rst
+Added to MANIFEST: doc/example/rrdcached/systemd.rst
+Added to MANIFEST: doc/example/rrdcached/upstart.rst
+Added to MANIFEST: doc/example/service/cron/crontab-generic-munin
+Added to MANIFEST: doc/example/service/hpux/munin-node.init
+Added to MANIFEST: doc/example/service/hpux/munin-node.rc
+Added to MANIFEST: doc/example/service/linux/cron/munin
+Added to MANIFEST: doc/example/service/linux/cron/munin-node
+Added to MANIFEST: doc/example/service/linux/systemd/munin-httpd.service
+Added to MANIFEST: doc/example/service/linux/systemd/munin-node.service
+Added to MANIFEST: doc/example/service/linux/upstart/munin-node.conf
+Added to MANIFEST: doc/example/service/service.rst
+Added to MANIFEST: doc/example/service/solaris/munin-node
+Added to MANIFEST: doc/example/service/solaris/munin-node.xml
+Added to MANIFEST: doc/example/tips/multimaster.rst
+Added to MANIFEST: doc/example/transport/ssh.rst
+Added to MANIFEST: doc/example/webserver/apache-cgi.rst
+Added to MANIFEST: doc/example/webserver/apache-cron.rst
+Added to MANIFEST: doc/example/webserver/apache-proxy.rst
+Added to MANIFEST: doc/example/webserver/lighttpd-proxy.rst
+Added to MANIFEST: doc/example/webserver/nginx-cron.rst
+Added to MANIFEST: doc/example/webserver/nginx-proxy.rst
+Added to MANIFEST: doc/howtos/index.rst
+Added to MANIFEST: doc/howtos/remove-spikes.rst
+Added to MANIFEST: doc/index.rst
+Added to MANIFEST: doc/installation/configuration.rst
+Added to MANIFEST: doc/installation/index.rst
+Added to MANIFEST: doc/installation/install.rst
+Added to MANIFEST: doc/installation/prerequisites.rst
+Added to MANIFEST: doc/installation/upgrade.rst
+Added to MANIFEST: doc/installation/webserver.rst
+Added to MANIFEST: doc/master/index.rst
+Added to MANIFEST: doc/master/network-protocol.rst
+Added to MANIFEST: doc/master/rrdcached.rst
+Added to MANIFEST: doc/master/rrdcached_effects.png
+Added to MANIFEST: doc/node/async.rst
+Added to MANIFEST: doc/node/index.rst
+Added to MANIFEST: doc/others/index.rst
+Added to MANIFEST: doc/plugin/env.rst
+Added to MANIFEST: doc/plugin/index.rst
+Added to MANIFEST: doc/plugin/multigraphing.rst
+Added to MANIFEST: doc/plugin/protocol-cap.rst
+Added to MANIFEST: doc/plugin/protocol-dirtyconfig.rst
+Added to MANIFEST: doc/plugin/protocol-multigraph.rst
+Added to MANIFEST: doc/plugin/snmp.rst
+Added to MANIFEST: doc/plugin/supersampling.rst
+Added to MANIFEST: doc/plugin/use.rst
+Added to MANIFEST: doc/plugin/writing.rst
+Added to MANIFEST: doc/preface/bugreport.rst
+Added to MANIFEST: doc/preface/conventions.rst
+Added to MANIFEST: doc/preface/index.rst
+Added to MANIFEST: doc/preface/moreinfo.rst
+Added to MANIFEST: doc/preface/whatis.rst
+Added to MANIFEST: doc/reference/directories.rst
+Added to MANIFEST: doc/reference/fqn.rst
+Added to MANIFEST: doc/reference/graph-category.rst
+Added to MANIFEST: doc/reference/history.rst
+Added to MANIFEST: doc/reference/index.rst
+Added to MANIFEST: doc/reference/munin-async.rst
+Added to MANIFEST: doc/reference/munin-asyncd.rst
+Added to MANIFEST: doc/reference/munin-cgi-graph.rst
+Added to MANIFEST: doc/reference/munin-cgi-html.rst
+Added to MANIFEST: doc/reference/munin-check.rst
+Added to MANIFEST: doc/reference/munin-cron.rst
+Added to MANIFEST: doc/reference/munin-doc.rst
+Added to MANIFEST: doc/reference/munin-get.rst
+Added to MANIFEST: doc/reference/munin-graph.rst
+Added to MANIFEST: doc/reference/munin-html.rst
+Added to MANIFEST: doc/reference/munin-httpd.rst
+Added to MANIFEST: doc/reference/munin-limits.rst
+Added to MANIFEST: doc/reference/munin-node-configure.rst
+Added to MANIFEST: doc/reference/munin-node.conf.rst
+Added to MANIFEST: doc/reference/munin-node.rst
+Added to MANIFEST: doc/reference/munin-run.rst
+Added to MANIFEST: doc/reference/munin-update.rst
+Added to MANIFEST: doc/reference/munin.conf.rst
+Added to MANIFEST: doc/reference/munin.rst
+Added to MANIFEST: doc/reference/nomenclature.rst
+Added to MANIFEST: doc/reference/plugin.rst
+Added to MANIFEST: doc/tutorial/advanced-features.rst
+Added to MANIFEST: doc/tutorial/alert.rst
+Added to MANIFEST: doc/tutorial/extraordinary-usage.rst
+Added to MANIFEST: doc/tutorial/getting-started.rst
+Added to MANIFEST: doc/tutorial/index.rst
+Added to MANIFEST: doc/tutorial/monitoring-the-unreachable.rst
+Added to MANIFEST: doc/tutorial/Munin-Architecture.png
+Added to MANIFEST: doc/tutorial/Munin-snmp-via-dumbledore.png
+Added to MANIFEST: doc/tutorial/MuninPortForwarding.png
+Added to MANIFEST: doc/tutorial/MuninSSHForwarding.png
+Added to MANIFEST: doc/tutorial/nagios.rst
+Added to MANIFEST: doc/tutorial/snmp.rst
+Added to MANIFEST: doc/tutorial/troubleshooting.rst
+Added to MANIFEST: doc/tutorial/wildcard-plugins.rst
+Added to MANIFEST: docker-compose.yml
+Added to MANIFEST: Dockerfile.base
+Added to MANIFEST: Dockerfile.dev
+Added to MANIFEST: etc/munin-node.conf.PL
+Added to MANIFEST: etc/munin.conf.PL
+Added to MANIFEST: getversion
+Added to MANIFEST: HACKING.pod
+Added to MANIFEST: INSTALL.rst
+Added to MANIFEST: lib/Munin.pm.PL
+Added to MANIFEST: lib/Munin/Common/Config.pm
+Added to MANIFEST: lib/Munin/Common/Daemon.pm
+Added to MANIFEST: lib/Munin/Common/Defaults.pm.PL
+Added to MANIFEST: lib/Munin/Common/Logger.pm
+Added to MANIFEST: lib/Munin/Common/SyncDictFile.pm
+Added to MANIFEST: lib/Munin/Common/Timeout.pm
+Added to MANIFEST: lib/Munin/Common/TLS.pm
+Added to MANIFEST: lib/Munin/Common/TLSClient.pm
+Added to MANIFEST: lib/Munin/Common/TLSServer.pm
+Added to MANIFEST: lib/Munin/Common/Utils.pm
+Added to MANIFEST: lib/Munin/Master/Config.pm
+Added to MANIFEST: lib/Munin/Master/Graph.pm
+Added to MANIFEST: lib/Munin/Master/Group.pm
+Added to MANIFEST: lib/Munin/Master/GroupRepository.pm
+Added to MANIFEST: lib/Munin/Master/Host.pm
+Added to MANIFEST: lib/Munin/Master/HTML.pm
+Added to MANIFEST: lib/Munin/Master/Limits.pm
+Added to MANIFEST: lib/Munin/Master/Node.pm
+Added to MANIFEST: lib/Munin/Master/Static/CGI.pm
+Added to MANIFEST: lib/Munin/Master/Static/Graph.pm
+Added to MANIFEST: lib/Munin/Master/Static/HTML.pm
+Added to MANIFEST: lib/Munin/Master/Update.pm
+Added to MANIFEST: lib/Munin/Master/UpdateWorker.pm
+Added to MANIFEST: lib/Munin/Master/Utils.pm
+Added to MANIFEST: lib/Munin/Master/Worker.pm
+Added to MANIFEST: lib/Munin/Node/Config.pm
+Added to MANIFEST: lib/Munin/Node/Configure/Debug.pm
+Added to MANIFEST: lib/Munin/Node/Configure/History.pm
+Added to MANIFEST: lib/Munin/Node/Configure/HostEnumeration.pm
+Added to MANIFEST: lib/Munin/Node/Configure/Plugin.pm
+Added to MANIFEST: lib/Munin/Node/Configure/PluginList.pm
+Added to MANIFEST: lib/Munin/Node/OS.pm
+Added to MANIFEST: lib/Munin/Node/Server.pm
+Added to MANIFEST: lib/Munin/Node/Service.pm
+Added to MANIFEST: lib/Munin/Node/Session.pm
+Added to MANIFEST: lib/Munin/Node/SNMPConfig.pm
+Added to MANIFEST: lib/Munin/Node/SpoolReader.pm
+Added to MANIFEST: lib/Munin/Node/SpoolWriter.pm
+Added to MANIFEST: lib/Munin/Node/Utils.pm
+Added to MANIFEST: lib/Munin/Plugin.pm
+Added to MANIFEST: lib/Munin/Plugin/Framework.pm
+Added to MANIFEST: lib/Munin/Plugin/HTTP.pm
+Added to MANIFEST: lib/Munin/Plugin/Pgsql.pm
+Added to MANIFEST: lib/Munin/Plugin/SNMP.pm
+Added to MANIFEST: logo-horizontal-neg.svg
+Added to MANIFEST: logo-horizontal.svg
+Added to MANIFEST: logo.eps
+Added to MANIFEST: logo.png
+Added to MANIFEST: logo.svg
+Added to MANIFEST: Makefile.config
+Added to MANIFEST: Makefile.javaplugin
+Added to MANIFEST: MANIFEST
+Added to MANIFEST: out/build-pl.log
+Added to MANIFEST: out/build.log
+Added to MANIFEST: out/build2.log
+Added to MANIFEST: out/build3.log
+Added to MANIFEST: out/build4.log
+Added to MANIFEST: out/build5.log
+Added to MANIFEST: out/test.log
+Added to MANIFEST: out/test2.log
+Added to MANIFEST: out/test_limits.log
+Added to MANIFEST: out/test_limits2.log
+Added to MANIFEST: PLAN-3.0.md
+Added to MANIFEST: plugins/javalib/org/munin/plugin/jmx/AbstractAnnotationGraphsProvider.java
+Added to MANIFEST: plugins/javalib/org/munin/plugin/jmx/AbstractGraphsProvider.java
+Added to MANIFEST: plugins/javalib/org/munin/plugin/jmx/AbstractMemoryPoolProvider.java
+Added to MANIFEST: plugins/javalib/org/munin/plugin/jmx/AbstractMemoryUsageProvider.java
+Added to MANIFEST: plugins/javalib/org/munin/plugin/jmx/AbstractMultiGraphsProvider.java
+Added to MANIFEST: plugins/javalib/org/munin/plugin/jmx/BasicMBeanConnection.java
+Added to MANIFEST: plugins/javalib/org/munin/plugin/jmx/Beans.java
+Added to MANIFEST: plugins/javalib/org/munin/plugin/jmx/ClassesLoaded.java
+Added to MANIFEST: plugins/javalib/org/munin/plugin/jmx/ClassesLoadedTotal.java
+Added to MANIFEST: plugins/javalib/org/munin/plugin/jmx/ClassesUnloaded.java
+Added to MANIFEST: plugins/javalib/org/munin/plugin/jmx/CompilationTimeTotal.java
+Added to MANIFEST: plugins/javalib/org/munin/plugin/jmx/Config.java
+Added to MANIFEST: plugins/javalib/org/munin/plugin/jmx/CurrentThreadCpuTime.java
+Added to MANIFEST: plugins/javalib/org/munin/plugin/jmx/CurrentThreadUserTime.java
+Added to MANIFEST: plugins/javalib/org/munin/plugin/jmx/GarbageCollectionInfo.java
+Added to MANIFEST: plugins/javalib/org/munin/plugin/jmx/GCCount.java
+Added to MANIFEST: plugins/javalib/org/munin/plugin/jmx/GCCountGet.java
+Added to MANIFEST: plugins/javalib/org/munin/plugin/jmx/GCTime.java
+Added to MANIFEST: plugins/javalib/org/munin/plugin/jmx/GCTimeGet.java
+Added to MANIFEST: plugins/javalib/org/munin/plugin/jmx/GetMemoryPoolThresholdCount.java
+Added to MANIFEST: plugins/javalib/org/munin/plugin/jmx/GetUsageThresholdCount.java
+Added to MANIFEST: plugins/javalib/org/munin/plugin/jmx/LegacyPool.java
+Added to MANIFEST: plugins/javalib/org/munin/plugin/jmx/MemoryAllocatedHeap.java
+Added to MANIFEST: plugins/javalib/org/munin/plugin/jmx/MemoryAllocatedNonHeap.java
+Added to MANIFEST: plugins/javalib/org/munin/plugin/jmx/MemoryAllocatedTotal.java
+Added to MANIFEST: plugins/javalib/org/munin/plugin/jmx/MemoryEdenPeak.java
+Added to MANIFEST: plugins/javalib/org/munin/plugin/jmx/MemoryEdenUsage.java
+Added to MANIFEST: plugins/javalib/org/munin/plugin/jmx/MemoryEdenUsagePostGC.java
+Added to MANIFEST: plugins/javalib/org/munin/plugin/jmx/MemoryObjectsPending.java
+Added to MANIFEST: plugins/javalib/org/munin/plugin/jmx/MemoryPermGenPeak.java
+Added to MANIFEST: plugins/javalib/org/munin/plugin/jmx/MemoryPermGenUsage.java
+Added to MANIFEST: plugins/javalib/org/munin/plugin/jmx/MemoryPermGenUsagePostGC.java
+Added to MANIFEST: plugins/javalib/org/munin/plugin/jmx/MemoryPoolUsageProvider.java
+Added to MANIFEST: plugins/javalib/org/munin/plugin/jmx/MemorySurvivorPeak.java
+Added to MANIFEST: plugins/javalib/org/munin/plugin/jmx/MemorySurvivorUsage.java
+Added to MANIFEST: plugins/javalib/org/munin/plugin/jmx/MemorySurvivorUsagePostGC.java
+Added to MANIFEST: plugins/javalib/org/munin/plugin/jmx/MemoryTenuredGenPeak.java
+Added to MANIFEST: plugins/javalib/org/munin/plugin/jmx/MemoryTenuredGenUsage.java
+Added to MANIFEST: plugins/javalib/org/munin/plugin/jmx/MemoryTenuredGenUsagePostGC.java
+Added to MANIFEST: plugins/javalib/org/munin/plugin/jmx/MemorythresholdPostGCCount.java
+Added to MANIFEST: plugins/javalib/org/munin/plugin/jmx/MemorythresholdUsageCount.java
+Added to MANIFEST: plugins/javalib/org/munin/plugin/jmx/MultigraphAll.java
+Added to MANIFEST: plugins/javalib/org/munin/plugin/jmx/MultigraphMemory.java
+Added to MANIFEST: plugins/javalib/org/munin/plugin/jmx/MultigraphMisc.java
+Added to MANIFEST: plugins/javalib/org/munin/plugin/jmx/MultigraphThreads.java
+Added to MANIFEST: plugins/javalib/org/munin/plugin/jmx/PortProbe.java
+Added to MANIFEST: plugins/javalib/org/munin/plugin/jmx/ProcessorsAvailable.java
+Added to MANIFEST: plugins/javalib/org/munin/plugin/jmx/Threads.java
+Added to MANIFEST: plugins/javalib/org/munin/plugin/jmx/ThreadsDaemon.java
+Added to MANIFEST: plugins/javalib/org/munin/plugin/jmx/ThreadsDeadlocked.java
+Added to MANIFEST: plugins/javalib/org/munin/plugin/jmx/ThreadsHistorical.java
+Added to MANIFEST: plugins/javalib/org/munin/plugin/jmx/ThreadsPeak.java
+Added to MANIFEST: plugins/javalib/org/munin/plugin/jmx/ThreadsStartedTotal.java
+Added to MANIFEST: plugins/javalib/org/munin/plugin/jmx/Uptime.java
+Added to MANIFEST: plugins/node.d.aix/cpu
+Added to MANIFEST: plugins/node.d.aix/df
+Added to MANIFEST: plugins/node.d.aix/iostat
+Added to MANIFEST: plugins/node.d.aix/iostat.hd_only
+Added to MANIFEST: plugins/node.d.aix/iostat.vp_only
+Added to MANIFEST: plugins/node.d.aix/load
+Added to MANIFEST: plugins/node.d.aix/memory
+Added to MANIFEST: plugins/node.d.aix/netstat
+Added to MANIFEST: plugins/node.d.aix/processes
+Added to MANIFEST: plugins/node.d.aix/swap
+Added to MANIFEST: plugins/node.d.cygwin/df
+Added to MANIFEST: plugins/node.d.cygwin/netstat
+Added to MANIFEST: plugins/node.d.darwin/df_inode
+Added to MANIFEST: plugins/node.d.darwin/if_
+Added to MANIFEST: plugins/node.d.darwin/if_err_
+Added to MANIFEST: plugins/node.d.darwin/load
+Added to MANIFEST: plugins/node.d.darwin/uptime
+Added to MANIFEST: plugins/node.d.debug/colour_tester
+Added to MANIFEST: plugins/node.d.debug/env
+Added to MANIFEST: plugins/node.d.debug/extinfo_tester
+Added to MANIFEST: plugins/node.d.debug/id
+Added to MANIFEST: plugins/node.d.debug/if
+Added to MANIFEST: plugins/node.d.debug/multigraph_complex
+Added to MANIFEST: plugins/node.d.debug/multigraph_huge
+Added to MANIFEST: plugins/node.d.debug/multigraph_tester
+Added to MANIFEST: plugins/node.d.debug/negative_tester
+Added to MANIFEST: plugins/node.d.debug/rrdcached
+Added to MANIFEST: plugins/node.d.debug/sincos
+Added to MANIFEST: plugins/node.d.debug/sum_cdef_tester
+Added to MANIFEST: plugins/node.d.debug/tc
+Added to MANIFEST: plugins/node.d.debug/test_99_100
+Added to MANIFEST: plugins/node.d.debug/testplugin
+Added to MANIFEST: plugins/node.d.debug/warning_tester
+Added to MANIFEST: plugins/node.d.freebsd/coretemp
+Added to MANIFEST: plugins/node.d.freebsd/cpu
+Added to MANIFEST: plugins/node.d.freebsd/dev_cpu_
+Added to MANIFEST: plugins/node.d.freebsd/df
+Added to MANIFEST: plugins/node.d.freebsd/df_inode
+Added to MANIFEST: plugins/node.d.freebsd/if_
+Added to MANIFEST: plugins/node.d.freebsd/if_errcoll_
+Added to MANIFEST: plugins/node.d.freebsd/if_packets_
+Added to MANIFEST: plugins/node.d.freebsd/iostat
+Added to MANIFEST: plugins/node.d.freebsd/load
+Added to MANIFEST: plugins/node.d.freebsd/memory
+Added to MANIFEST: plugins/node.d.freebsd/netstat
+Added to MANIFEST: plugins/node.d.freebsd/open_files
+Added to MANIFEST: plugins/node.d.freebsd/swap
+Added to MANIFEST: plugins/node.d.freebsd/systat
+Added to MANIFEST: plugins/node.d.freebsd/uptime
+Added to MANIFEST: plugins/node.d.freebsd/vmstat
+Added to MANIFEST: plugins/node.d.hp-ux/df
+Added to MANIFEST: plugins/node.d.hp-ux/df_inode
+Added to MANIFEST: plugins/node.d.hp-ux/gp_gbl_mem_util
+Added to MANIFEST: plugins/node.d.hp-ux/gp_gbl_mem_util.adv
+Added to MANIFEST: plugins/node.d.hp-ux/if_
+Added to MANIFEST: plugins/node.d.hp-ux/if_err_
+Added to MANIFEST: plugins/node.d.hp-ux/mw_cpu
+Added to MANIFEST: plugins/node.d.hp-ux/mw_globalutilization
+Added to MANIFEST: plugins/node.d.hp-ux/mw_memory
+Added to MANIFEST: plugins/node.d.hp-ux/netstat_rate_tcp_
+Added to MANIFEST: plugins/node.d.hp-ux/sar_cpu
+Added to MANIFEST: plugins/node.d.java/jmx_
+Added to MANIFEST: plugins/node.d.java/jmx_tomcat_dbpools
+Added to MANIFEST: plugins/node.d.linux/apt
+Added to MANIFEST: plugins/node.d.linux/apt_all
+Added to MANIFEST: plugins/node.d.linux/bonding_err_
+Added to MANIFEST: plugins/node.d.linux/buddyinfo
+Added to MANIFEST: plugins/node.d.linux/cps_
+Added to MANIFEST: plugins/node.d.linux/cpuspeed
+Added to MANIFEST: plugins/node.d.linux/df
+Added to MANIFEST: plugins/node.d.linux/df_abs
+Added to MANIFEST: plugins/node.d.linux/diskstat_
+Added to MANIFEST: plugins/node.d.linux/diskstats
+Added to MANIFEST: plugins/node.d.linux/example-graphs/buddyinfo-day.png
+Added to MANIFEST: plugins/node.d.linux/example-graphs/buddyinfo-month.png
+Added to MANIFEST: plugins/node.d.linux/example-graphs/df-month.png
+Added to MANIFEST: plugins/node.d.linux/example-graphs/df_abs-month.png
+Added to MANIFEST: plugins/node.d.linux/example-graphs/if_-week.png
+Added to MANIFEST: plugins/node.d.linux/example-graphs/iostat-month.png
+Added to MANIFEST: plugins/node.d.linux/example-graphs/netstat-week.png
+Added to MANIFEST: plugins/node.d.linux/example-graphs/selinux_avcstat-day.png
+Added to MANIFEST: plugins/node.d.linux/example-graphs/tcp-day.png
+Added to MANIFEST: plugins/node.d.linux/example-graphs/yum-month.png
+Added to MANIFEST: plugins/node.d.linux/fw_conntrack
+Added to MANIFEST: plugins/node.d.linux/fw_forwarded_local
+Added to MANIFEST: plugins/node.d.linux/fw_packets
+Added to MANIFEST: plugins/node.d.linux/hwmon
+Added to MANIFEST: plugins/node.d.linux/if_
+Added to MANIFEST: plugins/node.d.linux/if_err_
+Added to MANIFEST: plugins/node.d.linux/iostat
+Added to MANIFEST: plugins/node.d.linux/iostat_ios
+Added to MANIFEST: plugins/node.d.linux/ip_
+Added to MANIFEST: plugins/node.d.linux/irqstats
+Added to MANIFEST: plugins/node.d.linux/lpar_cpu
+Added to MANIFEST: plugins/node.d.linux/meminfo
+Added to MANIFEST: plugins/node.d.linux/memory
+Added to MANIFEST: plugins/node.d.linux/netstat
+Added to MANIFEST: plugins/node.d.linux/netstat_multi
+Added to MANIFEST: plugins/node.d.linux/nfs4_client
+Added to MANIFEST: plugins/node.d.linux/nfs_client
+Added to MANIFEST: plugins/node.d.linux/nfsd
+Added to MANIFEST: plugins/node.d.linux/nfsd4
+Added to MANIFEST: plugins/node.d.linux/numa_
+Added to MANIFEST: plugins/node.d.linux/port_
+Added to MANIFEST: plugins/node.d.linux/proc
+Added to MANIFEST: plugins/node.d.linux/proc_pri
+Added to MANIFEST: plugins/node.d.linux/procfs
+Added to MANIFEST: plugins/node.d.linux/procsys
+Added to MANIFEST: plugins/node.d.linux/quota_usage_
+Added to MANIFEST: plugins/node.d.linux/selinux_avcstat
+Added to MANIFEST: plugins/node.d.linux/tcp
+Added to MANIFEST: plugins/node.d.linux/threads
+Added to MANIFEST: plugins/node.d.linux/vlan_
+Added to MANIFEST: plugins/node.d.linux/vlan_inetuse_
+Added to MANIFEST: plugins/node.d.linux/vlan_linkuse_
+Added to MANIFEST: plugins/node.d.linux/vserver_cpu_
+Added to MANIFEST: plugins/node.d.linux/vserver_loadavg
+Added to MANIFEST: plugins/node.d.linux/vserver_resources
+Added to MANIFEST: plugins/node.d.linux/yum
+Added to MANIFEST: plugins/node.d.netbsd/cpu
+Added to MANIFEST: plugins/node.d.netbsd/df
+Added to MANIFEST: plugins/node.d.netbsd/df_inode
+Added to MANIFEST: plugins/node.d.netbsd/example-graphs/uptime-year.png
+Added to MANIFEST: plugins/node.d.netbsd/forks
+Added to MANIFEST: plugins/node.d.netbsd/if_
+Added to MANIFEST: plugins/node.d.netbsd/if_errcoll_
+Added to MANIFEST: plugins/node.d.netbsd/interrupts
+Added to MANIFEST: plugins/node.d.netbsd/iostat
+Added to MANIFEST: plugins/node.d.netbsd/iostat_ops
+Added to MANIFEST: plugins/node.d.netbsd/irqstats
+Added to MANIFEST: plugins/node.d.netbsd/load
+Added to MANIFEST: plugins/node.d.netbsd/memory
+Added to MANIFEST: plugins/node.d.netbsd/memory_pools
+Added to MANIFEST: plugins/node.d.netbsd/memory_types
+Added to MANIFEST: plugins/node.d.netbsd/nfs_client
+Added to MANIFEST: plugins/node.d.netbsd/nfsd
+Added to MANIFEST: plugins/node.d.netbsd/open_files
+Added to MANIFEST: plugins/node.d.netbsd/sensors_
+Added to MANIFEST: plugins/node.d.netbsd/swap
+Added to MANIFEST: plugins/node.d.netbsd/uptime
+Added to MANIFEST: plugins/node.d.netbsd/vmstat
+Added to MANIFEST: plugins/node.d.openbsd/cpu
+Added to MANIFEST: plugins/node.d.openbsd/df
+Added to MANIFEST: plugins/node.d.openbsd/df_inode
+Added to MANIFEST: plugins/node.d.openbsd/if_
+Added to MANIFEST: plugins/node.d.openbsd/if_errcoll_
+Added to MANIFEST: plugins/node.d.openbsd/load
+Added to MANIFEST: plugins/node.d.openbsd/memory
+Added to MANIFEST: plugins/node.d.openbsd/netstat
+Added to MANIFEST: plugins/node.d.openbsd/open_files
+Added to MANIFEST: plugins/node.d.openbsd/swap
+Added to MANIFEST: plugins/node.d.openbsd/systat
+Added to MANIFEST: plugins/node.d.openbsd/uptime
+Added to MANIFEST: plugins/node.d.sunos/cpu
+Added to MANIFEST: plugins/node.d.sunos/df
+Added to MANIFEST: plugins/node.d.sunos/df_inode
+Added to MANIFEST: plugins/node.d.sunos/if_
+Added to MANIFEST: plugins/node.d.sunos/if_err_
+Added to MANIFEST: plugins/node.d.sunos/io_busy_
+Added to MANIFEST: plugins/node.d.sunos/io_bytes_
+Added to MANIFEST: plugins/node.d.sunos/io_ops_
+Added to MANIFEST: plugins/node.d.sunos/iostat
+Added to MANIFEST: plugins/node.d.sunos/load
+Added to MANIFEST: plugins/node.d.sunos/memory
+Added to MANIFEST: plugins/node.d.sunos/netstat
+Added to MANIFEST: plugins/node.d.sunos/paging_in
+Added to MANIFEST: plugins/node.d.sunos/paging_out
+Added to MANIFEST: plugins/node.d.sunos/temperature
+Added to MANIFEST: plugins/node.d.sunos/uptime
+Added to MANIFEST: plugins/node.d/amavis
+Added to MANIFEST: plugins/node.d/apache
+Added to MANIFEST: plugins/node.d/apc_envunit_
+Added to MANIFEST: plugins/node.d/apc_nis
+Added to MANIFEST: plugins/node.d/asterisk
+Added to MANIFEST: plugins/node.d/bind9_rndc
+Added to MANIFEST: plugins/node.d/cmc_tc_sensor_
+Added to MANIFEST: plugins/node.d/courier_
+Added to MANIFEST: plugins/node.d/courier_mta_mailqueue
+Added to MANIFEST: plugins/node.d/courier_mta_mailstats
+Added to MANIFEST: plugins/node.d/courier_mta_mailvolume
+Added to MANIFEST: plugins/node.d/cupsys_pages
+Added to MANIFEST: plugins/node.d/df
+Added to MANIFEST: plugins/node.d/df_inode
+Added to MANIFEST: plugins/node.d/dhcpd3
+Added to MANIFEST: plugins/node.d/digitemp_
+Added to MANIFEST: plugins/node.d/ejabberd_
+Added to MANIFEST: plugins/node.d/example-graphs/amavis-week.png
+Added to MANIFEST: plugins/node.d/example-graphs/hddtemp_smartctl-month.png
+Added to MANIFEST: plugins/node.d/example-graphs/hddtemp_smartctl-year.png
+Added to MANIFEST: plugins/node.d/example-graphs/munin_update-week.png
+Added to MANIFEST: plugins/node.d/example-graphs/nginx_request-week.png
+Added to MANIFEST: plugins/node.d/example-graphs/nginx_status-week.png
+Added to MANIFEST: plugins/node.d/example-graphs/ntp_kernel_err-week.png
+Added to MANIFEST: plugins/node.d/example-graphs/ntp_kernel_pll_off-day.png
+Added to MANIFEST: plugins/node.d/example-graphs/ntp_offset-day.png
+Added to MANIFEST: plugins/node.d/example-graphs/postfix_mailqueue-month.png
+Added to MANIFEST: plugins/node.d/example-graphs/postfix_mailstats-week.png
+Added to MANIFEST: plugins/node.d/example-graphs/postfix_mailvolume-month.png
+Added to MANIFEST: plugins/node.d/example-graphs/smart_-day.png
+Added to MANIFEST: plugins/node.d/exim_mailqueue
+Added to MANIFEST: plugins/node.d/exim_mailqueue_alt
+Added to MANIFEST: plugins/node.d/exim_mailstats
+Added to MANIFEST: plugins/node.d/external_
+Added to MANIFEST: plugins/node.d/fail2ban
+Added to MANIFEST: plugins/node.d/foldingathome
+Added to MANIFEST: plugins/node.d/foldingathome_rank
+Added to MANIFEST: plugins/node.d/foldingathome_wu
+Added to MANIFEST: plugins/node.d/freeradius_acct
+Added to MANIFEST: plugins/node.d/freeradius_auth
+Added to MANIFEST: plugins/node.d/freeradius_proxy_acct
+Added to MANIFEST: plugins/node.d/freeradius_proxy_auth
+Added to MANIFEST: plugins/node.d/haproxy_
+Added to MANIFEST: plugins/node.d/haproxy_ng
+Added to MANIFEST: plugins/node.d/hddtemp
+Added to MANIFEST: plugins/node.d/hddtemp2
+Added to MANIFEST: plugins/node.d/hddtemp_smartctl
+Added to MANIFEST: plugins/node.d/hddtempd
+Added to MANIFEST: plugins/node.d/hp2000_
+Added to MANIFEST: plugins/node.d/http_loadtime
+Added to MANIFEST: plugins/node.d/ifx_concurrent_sessions_
+Added to MANIFEST: plugins/node.d/ipac-ng
+Added to MANIFEST: plugins/node.d/ipmi_
+Added to MANIFEST: plugins/node.d/ipmi_sensor_
+Added to MANIFEST: plugins/node.d/ircu
+Added to MANIFEST: plugins/node.d/jenkins_builds_and_jobs
+Added to MANIFEST: plugins/node.d/loggrep
+Added to MANIFEST: plugins/node.d/lpstat
+Added to MANIFEST: plugins/node.d/mailman
+Added to MANIFEST: plugins/node.d/mailscanner
+Added to MANIFEST: plugins/node.d/mbmon_
+Added to MANIFEST: plugins/node.d/memcached_
+Added to MANIFEST: plugins/node.d/mhttping
+Added to MANIFEST: plugins/node.d/multiping
+Added to MANIFEST: plugins/node.d/multips
+Added to MANIFEST: plugins/node.d/multips_memory
+Added to MANIFEST: plugins/node.d/munin_stats
+Added to MANIFEST: plugins/node.d/munin_update
+Added to MANIFEST: plugins/node.d/mysql_
+Added to MANIFEST: plugins/node.d/named
+Added to MANIFEST: plugins/node.d/netopia
+Added to MANIFEST: plugins/node.d/netstat
+Added to MANIFEST: plugins/node.d/nginx_request
+Added to MANIFEST: plugins/node.d/nginx_status
+Added to MANIFEST: plugins/node.d/nomadix_users_
+Added to MANIFEST: plugins/node.d/ntp_
+Added to MANIFEST: plugins/node.d/ntp_kernel_err
+Added to MANIFEST: plugins/node.d/ntp_kernel_pll_freq
+Added to MANIFEST: plugins/node.d/ntp_kernel_pll_off
+Added to MANIFEST: plugins/node.d/ntp_offset
+Added to MANIFEST: plugins/node.d/ntp_states
+Added to MANIFEST: plugins/node.d/nut_misc
+Added to MANIFEST: plugins/node.d/nut_volts
+Added to MANIFEST: plugins/node.d/nutups_
+Added to MANIFEST: plugins/node.d/nvidia_
+Added to MANIFEST: plugins/node.d/openvpn
+Added to MANIFEST: plugins/node.d/perdition
+Added to MANIFEST: plugins/node.d/pgbouncer_connections
+Added to MANIFEST: plugins/node.d/pgbouncer_requests
+Added to MANIFEST: plugins/node.d/ping_
+Added to MANIFEST: plugins/node.d/pm3users_
+Added to MANIFEST: plugins/node.d/pop_stats
+Added to MANIFEST: plugins/node.d/postfix_mailqueue
+Added to MANIFEST: plugins/node.d/postfix_mailstats
+Added to MANIFEST: plugins/node.d/postfix_mailvolume
+Added to MANIFEST: plugins/node.d/postgres_autovacuum
+Added to MANIFEST: plugins/node.d/postgres_bgwriter
+Added to MANIFEST: plugins/node.d/postgres_cache_
+Added to MANIFEST: plugins/node.d/postgres_checkpoints
+Added to MANIFEST: plugins/node.d/postgres_checksums
+Added to MANIFEST: plugins/node.d/postgres_connections_
+Added to MANIFEST: plugins/node.d/postgres_connections_db
+Added to MANIFEST: plugins/node.d/postgres_locks_
+Added to MANIFEST: plugins/node.d/postgres_oldest_prepared_xact_
+Added to MANIFEST: plugins/node.d/postgres_prepared_xacts_
+Added to MANIFEST: plugins/node.d/postgres_querylength_
+Added to MANIFEST: plugins/node.d/postgres_scans_
+Added to MANIFEST: plugins/node.d/postgres_size_
+Added to MANIFEST: plugins/node.d/postgres_streaming_
+Added to MANIFEST: plugins/node.d/postgres_transactions_
+Added to MANIFEST: plugins/node.d/postgres_tuples_
+Added to MANIFEST: plugins/node.d/postgres_users
+Added to MANIFEST: plugins/node.d/postgres_xlog
+Added to MANIFEST: plugins/node.d/processes
+Added to MANIFEST: plugins/node.d/proxy_plugin
+Added to MANIFEST: plugins/node.d/ps_
+Added to MANIFEST: plugins/node.d/psu_
+Added to MANIFEST: plugins/node.d/qmailqstat
+Added to MANIFEST: plugins/node.d/qmailscan
+Added to MANIFEST: plugins/node.d/qmailscan-simple
+Added to MANIFEST: plugins/node.d/samba
+Added to MANIFEST: plugins/node.d/sendmail_mailqueue
+Added to MANIFEST: plugins/node.d/sendmail_mailstats
+Added to MANIFEST: plugins/node.d/sendmail_mailtraffic
+Added to MANIFEST: plugins/node.d/slapd_
+Added to MANIFEST: plugins/node.d/slapd_bdb_cache_
+Added to MANIFEST: plugins/node.d/slony_lag_
+Added to MANIFEST: plugins/node.d/smart_
+Added to MANIFEST: plugins/node.d/snmp__apc_ups
+Added to MANIFEST: plugins/node.d/snmp__cpuload
+Added to MANIFEST: plugins/node.d/snmp__df
+Added to MANIFEST: plugins/node.d/snmp__df_ram
+Added to MANIFEST: plugins/node.d/snmp__eltek_rectifier
+Added to MANIFEST: plugins/node.d/snmp__fc_if_
+Added to MANIFEST: plugins/node.d/snmp__fc_if_err_
+Added to MANIFEST: plugins/node.d/snmp__if_
+Added to MANIFEST: plugins/node.d/snmp__if_err_
+Added to MANIFEST: plugins/node.d/snmp__if_multi
+Added to MANIFEST: plugins/node.d/snmp__load
+Added to MANIFEST: plugins/node.d/snmp__memory
+Added to MANIFEST: plugins/node.d/snmp__netapp_diskusage_
+Added to MANIFEST: plugins/node.d/snmp__netapp_inodeusage_
+Added to MANIFEST: plugins/node.d/snmp__netstat
+Added to MANIFEST: plugins/node.d/snmp__print_pages
+Added to MANIFEST: plugins/node.d/snmp__print_supplies
+Added to MANIFEST: plugins/node.d/snmp__processes
+Added to MANIFEST: plugins/node.d/snmp__rdp_users
+Added to MANIFEST: plugins/node.d/snmp__sensors_fsc_bx_fan
+Added to MANIFEST: plugins/node.d/snmp__sensors_fsc_bx_temp
+Added to MANIFEST: plugins/node.d/snmp__sensors_fsc_fan
+Added to MANIFEST: plugins/node.d/snmp__sensors_fsc_temp
+Added to MANIFEST: plugins/node.d/snmp__sensors_mbm_fan
+Added to MANIFEST: plugins/node.d/snmp__sensors_mbm_temp
+Added to MANIFEST: plugins/node.d/snmp__sensors_mbm_volt
+Added to MANIFEST: plugins/node.d/snmp__swap
+Added to MANIFEST: plugins/node.d/snmp__uptime
+Added to MANIFEST: plugins/node.d/snmp__users
+Added to MANIFEST: plugins/node.d/snmp__winload
+Added to MANIFEST: plugins/node.d/snmp__winmem
+Added to MANIFEST: plugins/node.d/snort_alerts
+Added to MANIFEST: plugins/node.d/snort_bytes_pkt
+Added to MANIFEST: plugins/node.d/snort_drop_rate
+Added to MANIFEST: plugins/node.d/snort_pattern_match
+Added to MANIFEST: plugins/node.d/snort_pkts
+Added to MANIFEST: plugins/node.d/snort_traffic
+Added to MANIFEST: plugins/node.d/spamstats
+Added to MANIFEST: plugins/node.d/squeezebox_
+Added to MANIFEST: plugins/node.d/squid
+Added to MANIFEST: plugins/node.d/surfboard
+Added to MANIFEST: plugins/node.d/tomcat_
+Added to MANIFEST: plugins/node.d/tomcat_access
+Added to MANIFEST: plugins/node.d/tomcat_jvm
+Added to MANIFEST: plugins/node.d/tomcat_threads
+Added to MANIFEST: plugins/node.d/tomcat_volume
+Added to MANIFEST: plugins/node.d/users
+Added to MANIFEST: plugins/node.d/varnish_
+Added to MANIFEST: plugins/node.d/vmstat
+Added to MANIFEST: plugins/node.d/zimbra_
+Added to MANIFEST: plugins/plugin.sh
+Added to MANIFEST: plugins/plugins.history
+Added to MANIFEST: README.build-refactoring
+Added to MANIFEST: README.HP-UX
+Added to MANIFEST: README.OSX
+Added to MANIFEST: README.rst
+Added to MANIFEST: script/munin-async
+Added to MANIFEST: script/munin-asyncd
+Added to MANIFEST: script/munin-check
+Added to MANIFEST: script/munin-cron.PL
+Added to MANIFEST: script/munin-doc
+Added to MANIFEST: script/munin-get
+Added to MANIFEST: script/munin-graph
+Added to MANIFEST: script/munin-html
+Added to MANIFEST: script/munin-httpd
+Added to MANIFEST: script/munin-limits
+Added to MANIFEST: script/munin-node
+Added to MANIFEST: script/munin-node-configure
+Added to MANIFEST: script/munin-run
+Added to MANIFEST: script/munin-update
+Added to MANIFEST: t/config/munin-node.conf
+Added to MANIFEST: t/config/munin.conf
+Added to MANIFEST: t/config/plugin-conf.d/a_good_one.conf
+Added to MANIFEST: t/config/plugin-conf.d/clutter_before_section.conf
+Added to MANIFEST: t/config/plugin-conf.d/wildcards.conf
+Added to MANIFEST: t/lib/Munin/Common/Defaults/Tests.pm
+Added to MANIFEST: t/lib/Munin/Node/Session/Tests.pm
+Added to MANIFEST: t/lib/Munin/Tests.pm
+Added to MANIFEST: t/munin_common_config.t
+Added to MANIFEST: t/munin_master_graph.t
+Added to MANIFEST: t/munin_master_html.t
+Added to MANIFEST: t/munin_master_httpd_graph.t
+Added to MANIFEST: t/munin_master_httpd_html.t
+Added to MANIFEST: t/munin_master_limits.t
+Added to MANIFEST: t/munin_master_update.t
+Added to MANIFEST: t/munin_master_update_spoolfetch.t
+Added to MANIFEST: t/munin_master_update_worker.t
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-geirrod-balmung-g.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-geirrod-balmung1-g.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-geirrod-gungnir-d.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-geirrod-gungnir1-d.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-geirrod-mjollnir-a.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-geirrod1-balmung-g.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-geirrod1-balmung1-g.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-geirrod1-gungnir-d.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-geirrod1-gungnir1-d.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-geirrod1-mjollnir-a.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-geirrod2-balmung-g.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-geirrod2-balmung1-g.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-geirrod2-gungnir-d.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-geirrod2-gungnir1-d.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-geirrod2-mjollnir-a.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-geirrod3-balmung-g.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-geirrod3-balmung1-g.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-geirrod3-gungnir-d.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-geirrod3-gungnir1-d.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-geirrod3-mjollnir-a.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-gerd-balmung-d.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-gerd-balmung1-d.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-gerd-gungnir-a.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-gerd-gungnir1-a.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-gerd-mjollnir-g.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-gerd1-balmung-d.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-gerd1-balmung1-d.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-gerd1-gungnir-a.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-gerd1-gungnir1-a.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-gerd1-mjollnir-g.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-gerd2-balmung-d.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-gerd2-balmung1-d.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-gerd2-gungnir-a.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-gerd2-gungnir1-a.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-gerd2-mjollnir-g.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-gerd3-balmung-d.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-gerd3-balmung1-d.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-gerd3-gungnir-a.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-gerd3-gungnir1-a.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-gerd3-mjollnir-g.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-hymir-balmung-a.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-hymir-balmung1-a.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-hymir-gungnir-g.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-hymir-gungnir1-g.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-hymir-mjollnir-d.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-hymir1-balmung-a.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-hymir1-balmung1-a.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-hymir1-gungnir-g.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-hymir1-gungnir1-g.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-hymir1-mjollnir-d.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-hymir2-balmung-a.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-hymir2-balmung1-a.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-hymir2-gungnir-g.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-hymir2-gungnir1-g.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-hymir2-mjollnir-d.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-hymir3-balmung-a.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-hymir3-balmung1-a.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-hymir3-gungnir-g.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-hymir3-gungnir1-g.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-hymir3-mjollnir-d.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-jormungand-balmung-g.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-jormungand-balmung1-g.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-jormungand-gungnir-d.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-jormungand-gungnir1-d.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-jormungand-mjollnir-a.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-jormungand1-balmung-g.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-jormungand1-balmung1-g.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-jormungand1-gungnir-d.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-jormungand1-gungnir1-d.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-jormungand1-mjollnir-a.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-jormungand2-balmung-g.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-jormungand2-balmung1-g.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-jormungand2-gungnir-d.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-jormungand2-gungnir1-d.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-jormungand2-mjollnir-a.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-load-balmung-d.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-load-balmung1-d.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-load-gungnir-a.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-load-gungnir1-a.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-load-mjollnir-g.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-load1-balmung-d.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-load1-balmung1-d.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-load1-gungnir-a.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-load1-gungnir1-a.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-load1-mjollnir-g.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-load2-balmung-d.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-load2-balmung1-d.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-load2-gungnir-a.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-load2-gungnir1-a.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-load2-mjollnir-g.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-mjollnir-balmung-a.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-mjollnir-balmung1-a.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-mjollnir-gungnir-g.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-mjollnir-gungnir1-g.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-mjollnir-mjollnir-d.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-mjollnir1-balmung-a.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-mjollnir1-balmung1-a.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-mjollnir1-gungnir-g.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-mjollnir1-gungnir1-g.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-mjollnir1-mjollnir-d.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-mjollnir2-balmung-a.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-mjollnir2-balmung1-a.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-mjollnir2-gungnir-g.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-mjollnir2-gungnir1-g.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-mjollnir2-mjollnir-d.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-surt-balmung-g.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-surt-balmung1-g.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-surt-gungnir-d.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-surt-gungnir1-d.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-surt-mjollnir-a.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-surt1-balmung-g.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-surt1-balmung1-g.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-surt1-gungnir-d.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-surt1-gungnir1-d.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-surt1-mjollnir-a.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-surt2-balmung-g.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-surt2-balmung1-g.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-surt2-gungnir-d.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-surt2-gungnir1-d.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-surt2-mjollnir-a.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-thiazi-balmung-d.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-thiazi-balmung1-d.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-thiazi-gungnir-a.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-thiazi-gungnir1-a.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-thiazi-mjollnir-g.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-thiazi1-balmung-d.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-thiazi1-balmung1-d.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-thiazi1-gungnir-a.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-thiazi1-gungnir1-a.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-thiazi1-mjollnir-g.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-thiazi2-balmung-d.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-thiazi2-balmung1-d.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-thiazi2-gungnir-a.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-thiazi2-gungnir1-a.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-thiazi2-mjollnir-g.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-ymir-balmung-a.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-ymir-balmung1-a.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-ymir-gungnir-g.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-ymir-gungnir1-g.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-ymir-mjollnir-d.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-ymir1-balmung-a.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-ymir1-balmung1-a.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-ymir1-gungnir-g.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-ymir1-gungnir1-g.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-ymir1-mjollnir-d.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-ymir2-balmung-a.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-ymir2-balmung1-a.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-ymir2-gungnir-g.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-ymir2-gungnir1-g.rrd
+Added to MANIFEST: t/sample_data/acme.com/testing.acme.com-ymir2-mjollnir-d.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-geirrod-balmung-g.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-geirrod-balmung1-g.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-geirrod-gungnir-d.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-geirrod-gungnir1-d.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-geirrod-mjollnir-a.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-geirrod1-balmung-g.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-geirrod1-balmung1-g.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-geirrod1-gungnir-d.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-geirrod1-gungnir1-d.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-geirrod1-mjollnir-a.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-geirrod2-balmung-g.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-geirrod2-balmung1-g.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-geirrod2-gungnir-d.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-geirrod2-gungnir1-d.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-geirrod2-mjollnir-a.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-geirrod3-balmung-g.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-geirrod3-balmung1-g.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-geirrod3-gungnir-d.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-geirrod3-gungnir1-d.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-geirrod3-mjollnir-a.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-gerd-balmung-d.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-gerd-balmung1-d.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-gerd-gungnir-a.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-gerd-gungnir1-a.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-gerd-mjollnir-g.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-gerd1-balmung-d.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-gerd1-balmung1-d.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-gerd1-gungnir-a.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-gerd1-gungnir1-a.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-gerd1-mjollnir-g.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-gerd2-balmung-d.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-gerd2-balmung1-d.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-gerd2-gungnir-a.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-gerd2-gungnir1-a.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-gerd2-mjollnir-g.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-gerd3-balmung-d.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-gerd3-balmung1-d.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-gerd3-gungnir-a.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-gerd3-gungnir1-a.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-gerd3-mjollnir-g.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-hymir-balmung-a.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-hymir-balmung1-a.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-hymir-gungnir-g.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-hymir-gungnir1-g.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-hymir-mjollnir-d.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-hymir1-balmung-a.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-hymir1-balmung1-a.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-hymir1-gungnir-g.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-hymir1-gungnir1-g.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-hymir1-mjollnir-d.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-hymir2-balmung-a.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-hymir2-balmung1-a.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-hymir2-gungnir-g.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-hymir2-gungnir1-g.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-hymir2-mjollnir-d.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-hymir3-balmung-a.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-hymir3-balmung1-a.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-hymir3-gungnir-g.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-hymir3-gungnir1-g.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-hymir3-mjollnir-d.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-jormungand-balmung-g.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-jormungand-balmung1-g.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-jormungand-gungnir-d.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-jormungand-gungnir1-d.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-jormungand-mjollnir-a.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-jormungand1-balmung-g.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-jormungand1-balmung1-g.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-jormungand1-gungnir-d.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-jormungand1-gungnir1-d.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-jormungand1-mjollnir-a.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-jormungand2-balmung-g.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-jormungand2-balmung1-g.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-jormungand2-gungnir-d.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-jormungand2-gungnir1-d.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-jormungand2-mjollnir-a.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-load-balmung-d.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-load-balmung1-d.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-load-gungnir-a.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-load-gungnir1-a.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-load-mjollnir-g.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-load1-balmung-d.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-load1-balmung1-d.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-load1-gungnir-a.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-load1-gungnir1-a.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-load1-mjollnir-g.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-load2-balmung-d.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-load2-balmung1-d.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-load2-gungnir-a.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-load2-gungnir1-a.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-load2-mjollnir-g.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-mjollnir-balmung-a.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-mjollnir-balmung1-a.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-mjollnir-gungnir-g.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-mjollnir-gungnir1-g.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-mjollnir-mjollnir-d.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-mjollnir1-balmung-a.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-mjollnir1-balmung1-a.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-mjollnir1-gungnir-g.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-mjollnir1-gungnir1-g.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-mjollnir1-mjollnir-d.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-mjollnir2-balmung-a.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-mjollnir2-balmung1-a.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-mjollnir2-gungnir-g.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-mjollnir2-gungnir1-g.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-mjollnir2-mjollnir-d.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-surt-balmung-g.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-surt-balmung1-g.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-surt-gungnir-d.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-surt-gungnir1-d.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-surt-mjollnir-a.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-surt1-balmung-g.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-surt1-balmung1-g.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-surt1-gungnir-d.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-surt1-gungnir1-d.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-surt1-mjollnir-a.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-surt2-balmung-g.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-surt2-balmung1-g.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-surt2-gungnir-d.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-surt2-gungnir1-d.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-surt2-mjollnir-a.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-thiazi-balmung-d.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-thiazi-balmung1-d.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-thiazi-gungnir-a.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-thiazi-gungnir1-a.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-thiazi-mjollnir-g.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-thiazi1-balmung-d.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-thiazi1-balmung1-d.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-thiazi1-gungnir-a.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-thiazi1-gungnir1-a.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-thiazi1-mjollnir-g.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-thiazi2-balmung-d.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-thiazi2-balmung1-d.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-thiazi2-gungnir-a.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-thiazi2-gungnir1-a.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-thiazi2-mjollnir-g.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-ymir-balmung-a.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-ymir-balmung1-a.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-ymir-gungnir-g.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-ymir-gungnir1-g.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-ymir-mjollnir-d.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-ymir1-balmung-a.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-ymir1-balmung1-a.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-ymir1-gungnir-g.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-ymir1-gungnir1-g.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-ymir1-mjollnir-d.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-ymir2-balmung-a.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-ymir2-balmung1-a.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-ymir2-gungnir-g.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-ymir2-gungnir1-g.rrd
+Added to MANIFEST: t/sample_data/aesir/alfheim.aesir/aegir.alfheim.aesir-ymir2-mjollnir-d.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-geirrod-balmung-g.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-geirrod-balmung1-g.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-geirrod-gungnir-d.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-geirrod-gungnir1-d.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-geirrod-mjollnir-a.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-geirrod1-balmung-g.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-geirrod1-balmung1-g.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-geirrod1-gungnir-d.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-geirrod1-gungnir1-d.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-geirrod1-mjollnir-a.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-geirrod2-balmung-g.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-geirrod2-balmung1-g.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-geirrod2-gungnir-d.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-geirrod2-gungnir1-d.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-geirrod2-mjollnir-a.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-geirrod3-balmung-g.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-geirrod3-balmung1-g.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-geirrod3-gungnir-d.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-geirrod3-gungnir1-d.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-geirrod3-mjollnir-a.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-gerd-balmung-d.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-gerd-balmung1-d.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-gerd-gungnir-a.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-gerd-gungnir1-a.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-gerd-mjollnir-g.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-gerd1-balmung-d.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-gerd1-balmung1-d.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-gerd1-gungnir-a.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-gerd1-gungnir1-a.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-gerd1-mjollnir-g.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-gerd2-balmung-d.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-gerd2-balmung1-d.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-gerd2-gungnir-a.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-gerd2-gungnir1-a.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-gerd2-mjollnir-g.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-gerd3-balmung-d.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-gerd3-balmung1-d.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-gerd3-gungnir-a.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-gerd3-gungnir1-a.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-gerd3-mjollnir-g.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-hymir-balmung-a.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-hymir-balmung1-a.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-hymir-gungnir-g.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-hymir-gungnir1-g.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-hymir-mjollnir-d.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-hymir1-balmung-a.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-hymir1-balmung1-a.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-hymir1-gungnir-g.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-hymir1-gungnir1-g.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-hymir1-mjollnir-d.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-hymir2-balmung-a.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-hymir2-balmung1-a.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-hymir2-gungnir-g.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-hymir2-gungnir1-g.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-hymir2-mjollnir-d.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-hymir3-balmung-a.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-hymir3-balmung1-a.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-hymir3-gungnir-g.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-hymir3-gungnir1-g.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-hymir3-mjollnir-d.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-jormungand-balmung-g.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-jormungand-balmung1-g.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-jormungand-gungnir-d.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-jormungand-gungnir1-d.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-jormungand-mjollnir-a.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-jormungand1-balmung-g.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-jormungand1-balmung1-g.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-jormungand1-gungnir-d.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-jormungand1-gungnir1-d.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-jormungand1-mjollnir-a.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-jormungand2-balmung-g.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-jormungand2-balmung1-g.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-jormungand2-gungnir-d.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-jormungand2-gungnir1-d.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-jormungand2-mjollnir-a.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-load-balmung-d.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-load-balmung1-d.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-load-gungnir-a.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-load-gungnir1-a.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-load-mjollnir-g.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-load1-balmung-d.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-load1-balmung1-d.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-load1-gungnir-a.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-load1-gungnir1-a.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-load1-mjollnir-g.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-load2-balmung-d.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-load2-balmung1-d.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-load2-gungnir-a.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-load2-gungnir1-a.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-load2-mjollnir-g.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-mjollnir-balmung-a.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-mjollnir-balmung1-a.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-mjollnir-gungnir-g.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-mjollnir-gungnir1-g.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-mjollnir-mjollnir-d.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-mjollnir1-balmung-a.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-mjollnir1-balmung1-a.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-mjollnir1-gungnir-g.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-mjollnir1-gungnir1-g.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-mjollnir1-mjollnir-d.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-mjollnir2-balmung-a.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-mjollnir2-balmung1-a.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-mjollnir2-gungnir-g.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-mjollnir2-gungnir1-g.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-mjollnir2-mjollnir-d.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-surt-balmung-g.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-surt-balmung1-g.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-surt-gungnir-d.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-surt-gungnir1-d.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-surt-mjollnir-a.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-surt1-balmung-g.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-surt1-balmung1-g.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-surt1-gungnir-d.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-surt1-gungnir1-d.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-surt1-mjollnir-a.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-surt2-balmung-g.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-surt2-balmung1-g.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-surt2-gungnir-d.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-surt2-gungnir1-d.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-surt2-mjollnir-a.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-thiazi-balmung-d.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-thiazi-balmung1-d.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-thiazi-gungnir-a.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-thiazi-gungnir1-a.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-thiazi-mjollnir-g.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-thiazi1-balmung-d.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-thiazi1-balmung1-d.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-thiazi1-gungnir-a.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-thiazi1-gungnir1-a.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-thiazi1-mjollnir-g.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-thiazi2-balmung-d.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-thiazi2-balmung1-d.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-thiazi2-gungnir-a.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-thiazi2-gungnir1-a.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-thiazi2-mjollnir-g.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-ymir-balmung-a.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-ymir-balmung1-a.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-ymir-gungnir-g.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-ymir-gungnir1-g.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-ymir-mjollnir-d.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-ymir1-balmung-a.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-ymir1-balmung1-a.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-ymir1-gungnir-g.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-ymir1-gungnir1-g.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-ymir1-mjollnir-d.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-ymir2-balmung-a.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-ymir2-balmung1-a.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-ymir2-gungnir-g.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-ymir2-gungnir1-g.rrd
+Added to MANIFEST: t/sample_data/asynjur/asgard.asynjur/alaisiagae.asgard.asynjur-ymir2-mjollnir-d.rrd
+Added to MANIFEST: t/sample_data/datafile.sqlite
+Added to MANIFEST: t/sample_data/localhost/localhost-geirrod-balmung-g.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-geirrod-balmung1-g.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-geirrod-gungnir-d.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-geirrod-gungnir1-d.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-geirrod-mjollnir-a.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-geirrod1-balmung-g.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-geirrod1-balmung1-g.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-geirrod1-gungnir-d.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-geirrod1-gungnir1-d.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-geirrod1-mjollnir-a.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-geirrod2-balmung-g.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-geirrod2-balmung1-g.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-geirrod2-gungnir-d.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-geirrod2-gungnir1-d.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-geirrod2-mjollnir-a.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-geirrod3-balmung-g.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-geirrod3-balmung1-g.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-geirrod3-gungnir-d.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-geirrod3-gungnir1-d.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-geirrod3-mjollnir-a.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-gerd-balmung-d.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-gerd-balmung1-d.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-gerd-gungnir-a.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-gerd-gungnir1-a.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-gerd-mjollnir-g.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-gerd1-balmung-d.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-gerd1-balmung1-d.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-gerd1-gungnir-a.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-gerd1-gungnir1-a.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-gerd1-mjollnir-g.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-gerd2-balmung-d.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-gerd2-balmung1-d.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-gerd2-gungnir-a.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-gerd2-gungnir1-a.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-gerd2-mjollnir-g.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-gerd3-balmung-d.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-gerd3-balmung1-d.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-gerd3-gungnir-a.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-gerd3-gungnir1-a.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-gerd3-mjollnir-g.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-hymir-balmung-a.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-hymir-balmung1-a.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-hymir-gungnir-g.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-hymir-gungnir1-g.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-hymir-mjollnir-d.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-hymir1-balmung-a.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-hymir1-balmung1-a.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-hymir1-gungnir-g.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-hymir1-gungnir1-g.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-hymir1-mjollnir-d.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-hymir2-balmung-a.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-hymir2-balmung1-a.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-hymir2-gungnir-g.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-hymir2-gungnir1-g.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-hymir2-mjollnir-d.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-hymir3-balmung-a.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-hymir3-balmung1-a.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-hymir3-gungnir-g.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-hymir3-gungnir1-g.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-hymir3-mjollnir-d.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-jormungand-balmung-g.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-jormungand-balmung1-g.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-jormungand-gungnir-d.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-jormungand-gungnir1-d.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-jormungand-mjollnir-a.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-jormungand1-balmung-g.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-jormungand1-balmung1-g.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-jormungand1-gungnir-d.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-jormungand1-gungnir1-d.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-jormungand1-mjollnir-a.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-jormungand2-balmung-g.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-jormungand2-balmung1-g.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-jormungand2-gungnir-d.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-jormungand2-gungnir1-d.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-jormungand2-mjollnir-a.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-load-balmung-d.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-load-balmung1-d.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-load-gungnir-a.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-load-gungnir1-a.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-load-mjollnir-g.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-load1-balmung-d.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-load1-balmung1-d.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-load1-gungnir-a.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-load1-gungnir1-a.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-load1-mjollnir-g.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-load2-balmung-d.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-load2-balmung1-d.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-load2-gungnir-a.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-load2-gungnir1-a.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-load2-mjollnir-g.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-mjollnir-balmung-a.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-mjollnir-balmung1-a.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-mjollnir-gungnir-g.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-mjollnir-gungnir1-g.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-mjollnir-mjollnir-d.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-mjollnir1-balmung-a.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-mjollnir1-balmung1-a.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-mjollnir1-gungnir-g.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-mjollnir1-gungnir1-g.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-mjollnir1-mjollnir-d.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-mjollnir2-balmung-a.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-mjollnir2-balmung1-a.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-mjollnir2-gungnir-g.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-mjollnir2-gungnir1-g.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-mjollnir2-mjollnir-d.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-surt-balmung-g.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-surt-balmung1-g.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-surt-gungnir-d.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-surt-gungnir1-d.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-surt-mjollnir-a.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-surt1-balmung-g.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-surt1-balmung1-g.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-surt1-gungnir-d.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-surt1-gungnir1-d.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-surt1-mjollnir-a.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-surt2-balmung-g.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-surt2-balmung1-g.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-surt2-gungnir-d.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-surt2-gungnir1-d.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-surt2-mjollnir-a.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-thiazi-balmung-d.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-thiazi-balmung1-d.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-thiazi-gungnir-a.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-thiazi-gungnir1-a.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-thiazi-mjollnir-g.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-thiazi1-balmung-d.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-thiazi1-balmung1-d.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-thiazi1-gungnir-a.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-thiazi1-gungnir1-a.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-thiazi1-mjollnir-g.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-thiazi2-balmung-d.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-thiazi2-balmung1-d.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-thiazi2-gungnir-a.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-thiazi2-gungnir1-a.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-thiazi2-mjollnir-g.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-ymir-balmung-a.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-ymir-balmung1-a.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-ymir-gungnir-g.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-ymir-gungnir1-g.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-ymir-mjollnir-d.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-ymir1-balmung-a.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-ymir1-balmung1-a.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-ymir1-gungnir-g.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-ymir1-gungnir1-g.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-ymir1-mjollnir-d.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-ymir2-balmung-a.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-ymir2-balmung1-a.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-ymir2-gungnir-g.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-ymir2-gungnir1-g.rrd
+Added to MANIFEST: t/sample_data/localhost/localhost-ymir2-mjollnir-d.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-geirrod-balmung-g.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-geirrod-balmung1-g.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-geirrod-gungnir-d.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-geirrod-gungnir1-d.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-geirrod-mjollnir-a.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-geirrod1-balmung-g.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-geirrod1-balmung1-g.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-geirrod1-gungnir-d.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-geirrod1-gungnir1-d.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-geirrod1-mjollnir-a.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-geirrod2-balmung-g.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-geirrod2-balmung1-g.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-geirrod2-gungnir-d.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-geirrod2-gungnir1-d.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-geirrod2-mjollnir-a.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-geirrod3-balmung-g.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-geirrod3-balmung1-g.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-geirrod3-gungnir-d.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-geirrod3-gungnir1-d.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-geirrod3-mjollnir-a.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-gerd-balmung-d.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-gerd-balmung1-d.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-gerd-gungnir-a.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-gerd-gungnir1-a.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-gerd-mjollnir-g.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-gerd1-balmung-d.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-gerd1-balmung1-d.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-gerd1-gungnir-a.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-gerd1-gungnir1-a.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-gerd1-mjollnir-g.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-gerd2-balmung-d.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-gerd2-balmung1-d.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-gerd2-gungnir-a.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-gerd2-gungnir1-a.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-gerd2-mjollnir-g.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-gerd3-balmung-d.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-gerd3-balmung1-d.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-gerd3-gungnir-a.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-gerd3-gungnir1-a.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-gerd3-mjollnir-g.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-hymir-balmung-a.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-hymir-balmung1-a.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-hymir-gungnir-g.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-hymir-gungnir1-g.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-hymir-mjollnir-d.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-hymir1-balmung-a.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-hymir1-balmung1-a.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-hymir1-gungnir-g.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-hymir1-gungnir1-g.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-hymir1-mjollnir-d.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-hymir2-balmung-a.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-hymir2-balmung1-a.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-hymir2-gungnir-g.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-hymir2-gungnir1-g.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-hymir2-mjollnir-d.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-hymir3-balmung-a.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-hymir3-balmung1-a.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-hymir3-gungnir-g.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-hymir3-gungnir1-g.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-hymir3-mjollnir-d.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-jormungand-balmung-g.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-jormungand-balmung1-g.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-jormungand-gungnir-d.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-jormungand-gungnir1-d.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-jormungand-mjollnir-a.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-jormungand1-balmung-g.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-jormungand1-balmung1-g.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-jormungand1-gungnir-d.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-jormungand1-gungnir1-d.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-jormungand1-mjollnir-a.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-jormungand2-balmung-g.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-jormungand2-balmung1-g.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-jormungand2-gungnir-d.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-jormungand2-gungnir1-d.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-jormungand2-mjollnir-a.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-load-balmung-d.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-load-balmung1-d.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-load-gungnir-a.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-load-gungnir1-a.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-load-mjollnir-g.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-load1-balmung-d.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-load1-balmung1-d.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-load1-gungnir-a.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-load1-gungnir1-a.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-load1-mjollnir-g.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-load2-balmung-d.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-load2-balmung1-d.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-load2-gungnir-a.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-load2-gungnir1-a.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-load2-mjollnir-g.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-mjollnir-balmung-a.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-mjollnir-balmung1-a.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-mjollnir-gungnir-g.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-mjollnir-gungnir1-g.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-mjollnir-mjollnir-d.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-mjollnir1-balmung-a.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-mjollnir1-balmung1-a.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-mjollnir1-gungnir-g.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-mjollnir1-gungnir1-g.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-mjollnir1-mjollnir-d.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-mjollnir2-balmung-a.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-mjollnir2-balmung1-a.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-mjollnir2-gungnir-g.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-mjollnir2-gungnir1-g.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-mjollnir2-mjollnir-d.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-surt-balmung-g.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-surt-balmung1-g.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-surt-gungnir-d.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-surt-gungnir1-d.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-surt-mjollnir-a.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-surt1-balmung-g.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-surt1-balmung1-g.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-surt1-gungnir-d.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-surt1-gungnir1-d.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-surt1-mjollnir-a.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-surt2-balmung-g.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-surt2-balmung1-g.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-surt2-gungnir-d.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-surt2-gungnir1-d.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-surt2-mjollnir-a.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-thiazi-balmung-d.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-thiazi-balmung1-d.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-thiazi-gungnir-a.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-thiazi-gungnir1-a.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-thiazi-mjollnir-g.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-thiazi1-balmung-d.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-thiazi1-balmung1-d.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-thiazi1-gungnir-a.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-thiazi1-gungnir1-a.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-thiazi1-mjollnir-g.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-thiazi2-balmung-d.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-thiazi2-balmung1-d.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-thiazi2-gungnir-a.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-thiazi2-gungnir1-a.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-thiazi2-mjollnir-g.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-ymir-balmung-a.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-ymir-balmung1-a.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-ymir-gungnir-g.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-ymir-gungnir1-g.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-ymir-mjollnir-d.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-ymir1-balmung-a.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-ymir1-balmung1-a.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-ymir1-gungnir-g.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-ymir1-gungnir1-g.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-ymir1-mjollnir-d.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-ymir2-balmung-a.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-ymir2-balmung1-a.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-ymir2-gungnir-g.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-ymir2-gungnir1-g.rrd
+Added to MANIFEST: t/sample_data/svartalfar/jotunheim.svartalfar/astrild.jotunheim.svartalfar-ymir2-mjollnir-d.rrd
+Added to MANIFEST: t/tls/CA/ca_cert.pem
+Added to MANIFEST: t/tls/master_cert.pem
+Added to MANIFEST: t/tls/master_key.pem
+Added to MANIFEST: t/tls/node_cert.pem
+Added to MANIFEST: t/tls/node_key.pem
+Added to MANIFEST: t/tls/openssl.cnf
+Added to MANIFEST: t/tls/README
+Added to MANIFEST: web/static/css/_base.scss
+Added to MANIFEST: web/static/css/_forms.scss
+Added to MANIFEST: web/static/css/_graphs.scss
+Added to MANIFEST: web/static/css/_header.scss
+Added to MANIFEST: web/static/css/_layout.scss
+Added to MANIFEST: web/static/css/_mixins.scss
+Added to MANIFEST: web/static/css/_responsive.scss
+Added to MANIFEST: web/static/css/materialdesignicons.css
+Added to MANIFEST: web/static/css/style.css
+Added to MANIFEST: web/static/css/style.scss
+Added to MANIFEST: web/static/fonts/materialdesignicons-webfont.eot
+Added to MANIFEST: web/static/fonts/materialdesignicons-webfont.svg
+Added to MANIFEST: web/static/fonts/materialdesignicons-webfont.ttf
+Added to MANIFEST: web/static/fonts/materialdesignicons-webfont.woff
+Added to MANIFEST: web/static/fonts/materialdesignicons-webfont.woff2
+Added to MANIFEST: web/static/img/favicons/android-chrome-144x144.png
+Added to MANIFEST: web/static/img/favicons/android-chrome-192x192.png
+Added to MANIFEST: web/static/img/favicons/android-chrome-36x36.png
+Added to MANIFEST: web/static/img/favicons/android-chrome-48x48.png
+Added to MANIFEST: web/static/img/favicons/android-chrome-72x72.png
+Added to MANIFEST: web/static/img/favicons/android-chrome-96x96.png
+Added to MANIFEST: web/static/img/favicons/apple-touch-icon-114x114.png
+Added to MANIFEST: web/static/img/favicons/apple-touch-icon-120x120.png
+Added to MANIFEST: web/static/img/favicons/apple-touch-icon-144x144.png
+Added to MANIFEST: web/static/img/favicons/apple-touch-icon-152x152.png
+Added to MANIFEST: web/static/img/favicons/apple-touch-icon-180x180.png
+Added to MANIFEST: web/static/img/favicons/apple-touch-icon-57x57.png
+Added to MANIFEST: web/static/img/favicons/apple-touch-icon-60x60.png
+Added to MANIFEST: web/static/img/favicons/apple-touch-icon-72x72.png
+Added to MANIFEST: web/static/img/favicons/apple-touch-icon-76x76.png
+Added to MANIFEST: web/static/img/favicons/apple-touch-icon-precomposed.png
+Added to MANIFEST: web/static/img/favicons/apple-touch-icon.png
+Added to MANIFEST: web/static/img/favicons/browserconfig.xml
+Added to MANIFEST: web/static/img/favicons/favicon-16x16.png
+Added to MANIFEST: web/static/img/favicons/favicon-194x194.png
+Added to MANIFEST: web/static/img/favicons/favicon-32x32.png
+Added to MANIFEST: web/static/img/favicons/favicon-96x96.png
+Added to MANIFEST: web/static/img/favicons/favicon.ico
+Added to MANIFEST: web/static/img/favicons/manifest.json
+Added to MANIFEST: web/static/img/favicons/mstile-144x144.png
+Added to MANIFEST: web/static/img/favicons/mstile-150x150.png
+Added to MANIFEST: web/static/img/favicons/mstile-310x150.png
+Added to MANIFEST: web/static/img/favicons/mstile-310x310.png
+Added to MANIFEST: web/static/img/favicons/mstile-70x70.png
+Added to MANIFEST: web/static/img/loading.gif
+Added to MANIFEST: web/static/img/logo-h-neg.png
+Added to MANIFEST: web/static/img/logo-h-neg.svg
+Added to MANIFEST: web/static/img/logo-h.png
+Added to MANIFEST: web/static/img/logo-h.svg
+Added to MANIFEST: web/static/img/logo.png
+Added to MANIFEST: web/static/img/placeholder.gif
+Added to MANIFEST: web/static/js/component-absolute.js
+Added to MANIFEST: web/static/js/component-autorefresh.js
+Added to MANIFEST: web/static/js/component-dynazoom-modal.js
+Added to MANIFEST: web/static/js/component-eventruler.js
+Added to MANIFEST: web/static/js/component-graph.js
+Added to MANIFEST: web/static/js/component-modal.js
+Added to MANIFEST: web/static/js/component-tabs.js
+Added to MANIFEST: web/static/js/component-timerangeSwitch.js
+Added to MANIFEST: web/static/js/component-toolbar.js
+Added to MANIFEST: web/static/js/component-treeview.js
+Added to MANIFEST: web/static/js/formatdate.js
+Added to MANIFEST: web/static/js/jquery-3.7.1.min.js
+Added to MANIFEST: web/static/js/munin-categoryview.js
+Added to MANIFEST: web/static/js/munin-comparison.js
+Added to MANIFEST: web/static/js/munin-domainview.js
+Added to MANIFEST: web/static/js/munin-dynazoom.js
+Added to MANIFEST: web/static/js/munin-nodeview.js
+Added to MANIFEST: web/static/js/munin-overview.js
+Added to MANIFEST: web/static/js/munin-serviceview.js
+Added to MANIFEST: web/static/js/querystring.js
+Added to MANIFEST: web/static/js/script.js
+Added to MANIFEST: web/templates/munin-categoryview.tmpl
+Added to MANIFEST: web/templates/munin-comparison.tmpl
+Added to MANIFEST: web/templates/munin-domainview.tmpl
+Added to MANIFEST: web/templates/munin-dynazoom.tmpl
+Added to MANIFEST: web/templates/munin-htaccess.in
+Added to MANIFEST: web/templates/munin-nodeview.tmpl
+Added to MANIFEST: web/templates/munin-overview.tmpl
+Added to MANIFEST: web/templates/munin-problemview.tmpl
+Added to MANIFEST: web/templates/munin-serviceview.tmpl
+Added to MANIFEST: web/templates/partial/bottom_navigation.tmpl
+Added to MANIFEST: web/templates/partial/footer.tmpl
+Added to MANIFEST: web/templates/partial/generated_by.tmpl
+Added to MANIFEST: web/templates/partial/head.tmpl
+Added to MANIFEST: web/templates/partial/logo_navigation.tmpl
+Added to MANIFEST: web/templates/partial/logo_navigation_comparison.tmpl
+Added to MANIFEST: web/templates/partial/logo_navigation_problem.tmpl
+Added to MANIFEST: web/templates/partial/navigation.tmpl
+Added to MANIFEST: xt/critic.t
+Added to MANIFEST: xt/plugins-munindoc.t
+Added to MANIFEST: xt/plugins.t
+Could not get valid metadata. Error is: Invalid metadata structure. Errors: 'unknown' for 'version' is not a valid version. (version) [Validation: 2]
+ at /usr/share/perl5/Module/Build/Base.pm line 4570.
+
+Could not create MYMETA files
+Creating new 'Build' script for 'Munin' version 'unknown'
+Building Munin
+Installing /app/sandbox/man/man1/munin-node.1p
+Installing /app/sandbox/man/man1/munin-get.1p
+Installing /app/sandbox/man/man1/munin-async.1p
+Installing /app/sandbox/man/man1/munin-node-configure.1p
+Installing /app/sandbox/man/man1/munin-asyncd.1p
+Installing /app/sandbox/man/man1/munin-graph.1p
+Installing /app/sandbox/man/man1/munin-doc.1p
+Installing /app/sandbox/man/man1/munin-html.1p
+Installing /app/sandbox/man/man1/munin-httpd.1p
+Installing /app/sandbox/man/man1/munin-run.1p
+Installing /app/sandbox/man/man1/munin-limits.1p
+Installing /app/sandbox/man/man1/munin-update.1p
+Installing /app/sandbox/etc/munin.conf.sample
+Installing /app/sandbox/etc/munin-node.conf.sample
+Installing /app/sandbox/lib/perl5/Munin.pm
+Installing /app/sandbox/lib/perl5/Munin/Plugin.pm
+Installing /app/sandbox/lib/perl5/Munin/Plugin/Framework.pm
+Installing /app/sandbox/lib/perl5/Munin/Plugin/SNMP.pm
+Installing /app/sandbox/lib/perl5/Munin/Plugin/Pgsql.pm
+Installing /app/sandbox/lib/perl5/Munin/Plugin/HTTP.pm
+Installing /app/sandbox/lib/perl5/Munin/Node/OS.pm
+Installing /app/sandbox/lib/perl5/Munin/Node/Config.pm
+Installing /app/sandbox/lib/perl5/Munin/Node/SpoolWriter.pm
+Installing /app/sandbox/lib/perl5/Munin/Node/SNMPConfig.pm
+Installing /app/sandbox/lib/perl5/Munin/Node/Service.pm
+Installing /app/sandbox/lib/perl5/Munin/Node/Utils.pm
+Installing /app/sandbox/lib/perl5/Munin/Node/Session.pm
+Installing /app/sandbox/lib/perl5/Munin/Node/Server.pm
+Installing /app/sandbox/lib/perl5/Munin/Node/SpoolReader.pm
+Installing /app/sandbox/lib/perl5/Munin/Node/Configure/Plugin.pm
+Installing /app/sandbox/lib/perl5/Munin/Node/Configure/PluginList.pm
+Installing /app/sandbox/lib/perl5/Munin/Node/Configure/HostEnumeration.pm
+Installing /app/sandbox/lib/perl5/Munin/Node/Configure/Debug.pm
+Installing /app/sandbox/lib/perl5/Munin/Node/Configure/History.pm
+Installing /app/sandbox/lib/perl5/Munin/Common/TLSClient.pm
+Installing /app/sandbox/lib/perl5/Munin/Common/Config.pm
+Installing /app/sandbox/lib/perl5/Munin/Common/Defaults.pm
+Installing /app/sandbox/lib/perl5/Munin/Common/TLS.pm
+Installing /app/sandbox/lib/perl5/Munin/Common/Daemon.pm
+Installing /app/sandbox/lib/perl5/Munin/Common/Timeout.pm
+Installing /app/sandbox/lib/perl5/Munin/Common/TLSServer.pm
+Installing /app/sandbox/lib/perl5/Munin/Common/SyncDictFile.pm
+Installing /app/sandbox/lib/perl5/Munin/Common/Utils.pm
+Installing /app/sandbox/lib/perl5/Munin/Common/Logger.pm
+Installing /app/sandbox/lib/perl5/Munin/Master/Graph.pm
+Installing /app/sandbox/lib/perl5/Munin/Master/Config.pm
+Installing /app/sandbox/lib/perl5/Munin/Master/Update.pm
+Installing /app/sandbox/lib/perl5/Munin/Master/Host.pm
+Installing /app/sandbox/lib/perl5/Munin/Master/Limits.pm
+Installing /app/sandbox/lib/perl5/Munin/Master/Utils.pm
+Installing /app/sandbox/lib/perl5/Munin/Master/Worker.pm
+Installing /app/sandbox/lib/perl5/Munin/Master/Node.pm
+Installing /app/sandbox/lib/perl5/Munin/Master/UpdateWorker.pm
+Installing /app/sandbox/lib/perl5/Munin/Master/GroupRepository.pm
+Installing /app/sandbox/lib/perl5/Munin/Master/HTML.pm
+Installing /app/sandbox/lib/perl5/Munin/Master/Group.pm
+Installing /app/sandbox/lib/perl5/Munin/Master/Static/Graph.pm
+Installing /app/sandbox/lib/perl5/Munin/Master/Static/HTML.pm
+Installing /app/sandbox/lib/perl5/Munin/Master/Static/CGI.pm
+Installing /app/sandbox/man/man3/Munin::Common::Utils.3pm
+Installing /app/sandbox/man/man3/Munin::Node::Config.3pm
+Installing /app/sandbox/man/man3/Munin::Node::SNMPConfig.3pm
+Installing /app/sandbox/man/man3/Munin::Common::Defaults.3pm
+Installing /app/sandbox/man/man3/Munin::Common::Daemon.3pm
+Installing /app/sandbox/man/man3/Munin::Common::TLSClient.3pm
+Installing /app/sandbox/man/man3/Munin::Node::SpoolWriter.3pm
+Installing /app/sandbox/man/man3/Munin::Node::OS.3pm
+Installing /app/sandbox/man/man3/Munin::Node::Utils.3pm
+Installing /app/sandbox/man/man3/Munin::Master::UpdateWorker.3pm
+Installing /app/sandbox/man/man3/Munin::Node::Server.3pm
+Installing /app/sandbox/man/man3/Munin::Common::Timeout.3pm
+Installing /app/sandbox/man/man3/Munin::Plugin::Framework.3pm
+Installing /app/sandbox/man/man3/Munin::Node::Configure::PluginList.3pm
+Installing /app/sandbox/man/man3/Munin::Common::TLS.3pm
+Installing /app/sandbox/man/man3/Munin::Plugin::HTTP.3pm
+Installing /app/sandbox/man/man3/Munin::Node::Session.3pm
+Installing /app/sandbox/man/man3/Munin::Node::Configure::History.3pm
+Installing /app/sandbox/man/man3/Munin::Node::Service.3pm
+Installing /app/sandbox/man/man3/Munin::Master::Config.3pm
+Installing /app/sandbox/man/man3/Munin::Master::Limits.3pm
+Installing /app/sandbox/man/man3/Munin::Plugin::SNMP.3pm
+Installing /app/sandbox/man/man3/Munin::Node::SpoolReader.3pm
+Installing /app/sandbox/man/man3/Munin::Master::GroupRepository.3pm
+Installing /app/sandbox/man/man3/Munin::Common::Logger.3pm
+Installing /app/sandbox/man/man3/Munin::Master::Worker.3pm
+Installing /app/sandbox/man/man3/Munin::Master::Utils.3pm
+Installing /app/sandbox/man/man3/Munin::Node::Configure::Debug.3pm
+Installing /app/sandbox/man/man3/Munin::Master::Host.3pm
+Installing /app/sandbox/man/man3/Munin::Plugin::Pgsql.3pm
+Installing /app/sandbox/man/man3/Munin::Node::Configure::Plugin.3pm
+Installing /app/sandbox/man/man3/Munin::Master::Group.3pm
+Installing /app/sandbox/man/man3/Munin::Common::Config.3pm
+Installing /app/sandbox/man/man3/Munin.3pm
+Installing /app/sandbox/man/man3/Munin::Common::TLSServer.3pm
+Installing /app/sandbox/man/man3/Munin::Plugin.3pm
+Installing /app/sandbox/man/man3/Munin::Master::Update.3pm
+Installing /app/sandbox/man/man3/Munin::Master::Node.3pm
+Installing /app/sandbox/man/man3/Munin::Node::Configure::HostEnumeration.3pm
+Installing /app/sandbox/share/plugins/bonding_err_
+Installing /app/sandbox/share/plugins/apache
+Installing /app/sandbox/share/plugins/postgres_bgwriter
+Installing /app/sandbox/share/plugins/external_
+Installing /app/sandbox/share/plugins/postgres_checkpoints
+Installing /app/sandbox/share/plugins/multips
+Installing /app/sandbox/share/plugins/tomcat_
+Installing /app/sandbox/share/plugins/pgbouncer_requests
+Installing /app/sandbox/share/plugins/yum
+Installing /app/sandbox/share/plugins/netstat
+Installing /app/sandbox/share/plugins/snmp__sensors_fsc_bx_fan
+Installing /app/sandbox/share/plugins/snmp__netapp_diskusage_
+Installing /app/sandbox/share/plugins/snmp__sensors_mbm_volt
+Installing /app/sandbox/share/plugins/postgres_streaming_
+Installing /app/sandbox/share/plugins/snmp__print_supplies
+Installing /app/sandbox/share/plugins/memcached_
+Installing /app/sandbox/share/plugins/mysql_
+Installing /app/sandbox/share/plugins/ifx_concurrent_sessions_
+Installing /app/sandbox/share/plugins/cps_
+Installing /app/sandbox/share/plugins/nvidia_
+Installing /app/sandbox/share/plugins/asterisk
+Installing /app/sandbox/share/plugins/ntp_states
+Installing /app/sandbox/share/plugins/tomcat_threads
+Installing /app/sandbox/share/plugins/postgres_querylength_
+Installing /app/sandbox/share/plugins/postgres_autovacuum
+Installing /app/sandbox/share/plugins/postgres_xlog
+Installing /app/sandbox/share/plugins/freeradius_acct
+Installing /app/sandbox/share/plugins/nutups_
+Installing /app/sandbox/share/plugins/lpar_cpu
+Installing /app/sandbox/share/plugins/snort_pattern_match
+Installing /app/sandbox/share/plugins/snmp__swap
+Installing /app/sandbox/share/plugins/hddtemp2
+Installing /app/sandbox/share/plugins/snmp__fc_if_
+Installing /app/sandbox/share/plugins/postfix_mailqueue
+Installing /app/sandbox/share/plugins/snmp__netapp_inodeusage_
+Installing /app/sandbox/share/plugins/cmc_tc_sensor_
+Installing /app/sandbox/share/plugins/ipmi_sensor_
+Installing /app/sandbox/share/plugins/vlan_linkuse_
+Installing /app/sandbox/share/plugins/nginx_request
+Installing /app/sandbox/share/plugins/snmp__uptime
+Installing /app/sandbox/share/plugins/munin_update
+Installing /app/sandbox/share/plugins/postgres_connections_
+Installing /app/sandbox/share/plugins/qmailqstat
+Installing /app/sandbox/share/plugins/http_loadtime
+Installing /app/sandbox/share/plugins/foldingathome_wu
+Installing /app/sandbox/share/plugins/if_err_
+Installing /app/sandbox/share/plugins/amavis
+Installing /app/sandbox/share/plugins/ps_
+Installing /app/sandbox/share/plugins/squeezebox_
+Installing /app/sandbox/share/plugins/snmp__users
+Installing /app/sandbox/share/plugins/snmp__print_pages
+Installing /app/sandbox/share/plugins/netstat_multi
+Installing /app/sandbox/share/plugins/users
+Installing /app/sandbox/share/plugins/digitemp_
+Installing /app/sandbox/share/plugins/freeradius_proxy_acct
+Installing /app/sandbox/share/plugins/named
+Installing /app/sandbox/share/plugins/openvpn
+Installing /app/sandbox/share/plugins/courier_
+Installing /app/sandbox/share/plugins/fail2ban
+Installing /app/sandbox/share/plugins/hddtemp
+Installing /app/sandbox/share/plugins/vserver_resources
+Installing /app/sandbox/share/plugins/nomadix_users_
+Installing /app/sandbox/share/plugins/vserver_loadavg
+Installing /app/sandbox/share/plugins/sendmail_mailtraffic
+Installing /app/sandbox/share/plugins/snmp__sensors_fsc_temp
+Installing /app/sandbox/share/plugins/jenkins_builds_and_jobs
+Installing /app/sandbox/share/plugins/snmp__processes
+Installing /app/sandbox/share/plugins/quota_usage_
+Installing /app/sandbox/share/plugins/postgres_connections_db
+Installing /app/sandbox/share/plugins/postgres_checksums
+Installing /app/sandbox/share/plugins/foldingathome
+Installing /app/sandbox/share/plugins/nginx_status
+Installing /app/sandbox/share/plugins/courier_mta_mailqueue
+Installing /app/sandbox/share/plugins/haproxy_ng
+Installing /app/sandbox/share/plugins/postgres_locks_
+Installing /app/sandbox/share/plugins/postgres_cache_
+Installing /app/sandbox/share/plugins/memory
+Installing /app/sandbox/share/plugins/zimbra_
+Installing /app/sandbox/share/plugins/diskstats
+Installing /app/sandbox/share/plugins/snmp__load
+Installing /app/sandbox/share/plugins/slony_lag_
+Installing /app/sandbox/share/plugins/multips_memory
+Installing /app/sandbox/share/plugins/ipac-ng
+Installing /app/sandbox/share/plugins/nfs4_client
+Installing /app/sandbox/share/plugins/snmp__if_err_
+Installing /app/sandbox/share/plugins/postgres_prepared_xacts_
+Installing /app/sandbox/share/plugins/ping_
+Installing /app/sandbox/share/plugins/foldingathome_rank
+Installing /app/sandbox/share/plugins/fw_packets
+Installing /app/sandbox/share/plugins/apt_all
+Installing /app/sandbox/share/plugins/irqstats
+Installing /app/sandbox/share/plugins/vlan_
+Installing /app/sandbox/share/plugins/numa_
+Installing /app/sandbox/share/plugins/slapd_
+Installing /app/sandbox/share/plugins/snmp__winmem
+Installing /app/sandbox/share/plugins/nut_misc
+Installing /app/sandbox/share/plugins/processes
+Installing /app/sandbox/share/plugins/snmp__cpuload
+Installing /app/sandbox/share/plugins/apc_envunit_
+Installing /app/sandbox/share/plugins/postgres_users
+Installing /app/sandbox/share/plugins/smart_
+Installing /app/sandbox/share/plugins/snort_pkts
+Installing /app/sandbox/share/plugins/courier_mta_mailvolume
+Installing /app/sandbox/share/plugins/proxy_plugin
+Installing /app/sandbox/share/plugins/ntp_kernel_err
+Installing /app/sandbox/share/plugins/cpuspeed
+Installing /app/sandbox/share/plugins/snmp__if_multi
+Installing /app/sandbox/share/plugins/buddyinfo
+Installing /app/sandbox/share/plugins/slapd_bdb_cache_
+Installing /app/sandbox/share/plugins/surfboard
+Installing /app/sandbox/share/plugins/vlan_inetuse_
+Installing /app/sandbox/share/plugins/tomcat_jvm
+Installing /app/sandbox/share/plugins/ntp_offset
+Installing /app/sandbox/share/plugins/snmp__eltek_rectifier
+Installing /app/sandbox/share/plugins/bind9_rndc
+Installing /app/sandbox/share/plugins/threads
+Installing /app/sandbox/share/plugins/psu_
+Installing /app/sandbox/share/plugins/proc
+Installing /app/sandbox/share/plugins/snmp__sensors_mbm_fan
+Installing /app/sandbox/share/plugins/ip_
+Installing /app/sandbox/share/plugins/apt
+Installing /app/sandbox/share/plugins/mailman
+Installing /app/sandbox/share/plugins/sendmail_mailqueue
+Installing /app/sandbox/share/plugins/dhcpd3
+Installing /app/sandbox/share/plugins/sendmail_mailstats
+Installing /app/sandbox/share/plugins/cupsys_pages
+Installing /app/sandbox/share/plugins/snmp__rdp_users
+Installing /app/sandbox/share/plugins/procfs
+Installing /app/sandbox/share/plugins/meminfo
+Installing /app/sandbox/share/plugins/exim_mailqueue_alt
+Installing /app/sandbox/share/plugins/proc_pri
+Installing /app/sandbox/share/plugins/courier_mta_mailstats
+Installing /app/sandbox/share/plugins/nfs_client
+Installing /app/sandbox/share/plugins/fw_conntrack
+Installing /app/sandbox/share/plugins/if_
+Installing /app/sandbox/share/plugins/mailscanner
+Installing /app/sandbox/share/plugins/qmailscan-simple
+Installing /app/sandbox/share/plugins/varnish_
+Installing /app/sandbox/share/plugins/snmp__sensors_fsc_fan
+Installing /app/sandbox/share/plugins/snort_alerts
+Installing /app/sandbox/share/plugins/mbmon_
+Installing /app/sandbox/share/plugins/tcp
+Installing /app/sandbox/share/plugins/snmp__memory
+Installing /app/sandbox/share/plugins/ircu
+Installing /app/sandbox/share/plugins/nut_volts
+Installing /app/sandbox/share/plugins/snort_traffic
+Installing /app/sandbox/share/plugins/snmp__sensors_fsc_bx_temp
+Installing /app/sandbox/share/plugins/ntp_kernel_pll_freq
+Installing /app/sandbox/share/plugins/diskstat_
+Installing /app/sandbox/share/plugins/netopia
+Installing /app/sandbox/share/plugins/postgres_scans_
+Installing /app/sandbox/share/plugins/postgres_tuples_
+Installing /app/sandbox/share/plugins/snmp__netstat
+Installing /app/sandbox/share/plugins/squid
+Installing /app/sandbox/share/plugins/postgres_oldest_prepared_xact_
+Installing /app/sandbox/share/plugins/nfsd4
+Installing /app/sandbox/share/plugins/ntp_kernel_pll_off
+Installing /app/sandbox/share/plugins/snmp__fc_if_err_
+Installing /app/sandbox/share/plugins/vmstat
+Installing /app/sandbox/share/plugins/ntp_
+Installing /app/sandbox/share/plugins/freeradius_proxy_auth
+Installing /app/sandbox/share/plugins/port_
+Installing /app/sandbox/share/plugins/snmp__apc_ups
+Installing /app/sandbox/share/plugins/fw_forwarded_local
+Installing /app/sandbox/share/plugins/iostat
+Installing /app/sandbox/share/plugins/exim_mailstats
+Installing /app/sandbox/share/plugins/tomcat_access
+Installing /app/sandbox/share/plugins/lpstat
+Installing /app/sandbox/share/plugins/nfsd
+Installing /app/sandbox/share/plugins/hddtempd
+Installing /app/sandbox/share/plugins/postgres_transactions_
+Installing /app/sandbox/share/plugins/df_abs
+Installing /app/sandbox/share/plugins/df_inode
+Installing /app/sandbox/share/plugins/snort_drop_rate
+Installing /app/sandbox/share/plugins/exim_mailqueue
+Installing /app/sandbox/share/plugins/tomcat_volume
+Installing /app/sandbox/share/plugins/selinux_avcstat
+Installing /app/sandbox/share/plugins/perdition
+Installing /app/sandbox/share/plugins/hwmon
+Installing /app/sandbox/share/plugins/mhttping
+Installing /app/sandbox/share/plugins/ipmi_
+Installing /app/sandbox/share/plugins/hp2000_
+Installing /app/sandbox/share/plugins/snort_bytes_pkt
+Installing /app/sandbox/share/plugins/pgbouncer_connections
+Installing /app/sandbox/share/plugins/munin_stats
+Installing /app/sandbox/share/plugins/hddtemp_smartctl
+Installing /app/sandbox/share/plugins/qmailscan
+Installing /app/sandbox/share/plugins/snmp__sensors_mbm_temp
+Installing /app/sandbox/share/plugins/loggrep
+Installing /app/sandbox/share/plugins/iostat_ios
+Installing /app/sandbox/share/plugins/pm3users_
+Installing /app/sandbox/share/plugins/vserver_cpu_
+Installing /app/sandbox/share/plugins/ejabberd_
+Installing /app/sandbox/share/plugins/snmp__winload
+Installing /app/sandbox/share/plugins/snmp__df
+Installing /app/sandbox/share/plugins/postgres_size_
+Installing /app/sandbox/share/plugins/pop_stats
+Installing /app/sandbox/share/plugins/multiping
+Installing /app/sandbox/share/plugins/procsys
+Installing /app/sandbox/share/plugins/freeradius_auth
+Installing /app/sandbox/share/plugins/plugin.sh
+Installing /app/sandbox/share/plugins/haproxy_
+Installing /app/sandbox/share/plugins/apc_nis
+Installing /app/sandbox/share/plugins/spamstats
+Installing /app/sandbox/share/plugins/snmp__df_ram
+Installing /app/sandbox/share/plugins/samba
+Installing /app/sandbox/share/plugins/df
+Installing /app/sandbox/share/plugins/snmp__if_
+Installing /app/sandbox/bin/munin-html
+Installing /app/sandbox/bin/munin-update
+Installing /app/sandbox/bin/munin-node
+Installing /app/sandbox/bin/munin-get
+Installing /app/sandbox/bin/munin-graph
+Installing /app/sandbox/bin/munin-httpd
+Installing /app/sandbox/bin/munin-doc
+Installing /app/sandbox/bin/munin-node-configure
+Installing /app/sandbox/bin/munin-limits
+Installing /app/sandbox/bin/munin-async
+Installing /app/sandbox/bin/munin-cron
+Installing /app/sandbox/bin/munin-asyncd
+Installing /app/sandbox/bin/munin-run
+Installing /app/sandbox/etc/static/img/placeholder.gif
+Installing /app/sandbox/etc/static/img/logo-h-neg.svg
+Installing /app/sandbox/etc/static/img/loading.gif
+Installing /app/sandbox/etc/static/img/logo-h.png
+Installing /app/sandbox/etc/static/img/logo-h.svg
+Installing /app/sandbox/etc/static/img/logo-h-neg.png
+Installing /app/sandbox/etc/static/img/logo.png
+Installing /app/sandbox/etc/static/img/favicons/mstile-144x144.png
+Installing /app/sandbox/etc/static/img/favicons/android-chrome-48x48.png
+Installing /app/sandbox/etc/static/img/favicons/apple-touch-icon-72x72.png
+Installing /app/sandbox/etc/static/img/favicons/mstile-70x70.png
+Installing /app/sandbox/etc/static/img/favicons/manifest.json
+Installing /app/sandbox/etc/static/img/favicons/apple-touch-icon-144x144.png
+Installing /app/sandbox/etc/static/img/favicons/apple-touch-icon-76x76.png
+Installing /app/sandbox/etc/static/img/favicons/apple-touch-icon-152x152.png
+Installing /app/sandbox/etc/static/img/favicons/browserconfig.xml
+Installing /app/sandbox/etc/static/img/favicons/android-chrome-96x96.png
+Installing /app/sandbox/etc/static/img/favicons/mstile-150x150.png
+Installing /app/sandbox/etc/static/img/favicons/apple-touch-icon-precomposed.png
+Installing /app/sandbox/etc/static/img/favicons/favicon.ico
+Installing /app/sandbox/etc/static/img/favicons/apple-touch-icon-120x120.png
+Installing /app/sandbox/etc/static/img/favicons/apple-touch-icon-60x60.png
+Installing /app/sandbox/etc/static/img/favicons/android-chrome-72x72.png
+Installing /app/sandbox/etc/static/img/favicons/android-chrome-36x36.png
+Installing /app/sandbox/etc/static/img/favicons/favicon-96x96.png
+Installing /app/sandbox/etc/static/img/favicons/apple-touch-icon-114x114.png
+Installing /app/sandbox/etc/static/img/favicons/mstile-310x150.png
+Installing /app/sandbox/etc/static/img/favicons/favicon-16x16.png
+Installing /app/sandbox/etc/static/img/favicons/android-chrome-144x144.png
+Installing /app/sandbox/etc/static/img/favicons/favicon-194x194.png
+Installing /app/sandbox/etc/static/img/favicons/android-chrome-192x192.png
+Installing /app/sandbox/etc/static/img/favicons/apple-touch-icon-57x57.png
+Installing /app/sandbox/etc/static/img/favicons/mstile-310x310.png
+Installing /app/sandbox/etc/static/img/favicons/apple-touch-icon-180x180.png
+Installing /app/sandbox/etc/static/img/favicons/favicon-32x32.png
+Installing /app/sandbox/etc/static/img/favicons/apple-touch-icon.png
+Installing /app/sandbox/etc/static/css/_header.scss
+Installing /app/sandbox/etc/static/css/_graphs.scss
+Installing /app/sandbox/etc/static/css/_forms.scss
+Installing /app/sandbox/etc/static/css/_responsive.scss
+Installing /app/sandbox/etc/static/css/style.css
+Installing /app/sandbox/etc/static/css/materialdesignicons.css
+Installing /app/sandbox/etc/static/css/style.scss
+Installing /app/sandbox/etc/static/css/_base.scss
+Installing /app/sandbox/etc/static/css/_layout.scss
+Installing /app/sandbox/etc/static/css/_mixins.scss
+Installing /app/sandbox/etc/static/fonts/materialdesignicons-webfont.woff
+Installing /app/sandbox/etc/static/fonts/materialdesignicons-webfont.woff2
+Installing /app/sandbox/etc/static/fonts/materialdesignicons-webfont.svg
+Installing /app/sandbox/etc/static/fonts/materialdesignicons-webfont.ttf
+Installing /app/sandbox/etc/static/fonts/materialdesignicons-webfont.eot
+Installing /app/sandbox/etc/static/js/munin-comparison.js
+Installing /app/sandbox/etc/static/js/munin-dynazoom.js
+Installing /app/sandbox/etc/static/js/munin-categoryview.js
+Installing /app/sandbox/etc/static/js/munin-nodeview.js
+Installing /app/sandbox/etc/static/js/component-autorefresh.js
+Installing /app/sandbox/etc/static/js/component-tabs.js
+Installing /app/sandbox/etc/static/js/formatdate.js
+Installing /app/sandbox/etc/static/js/component-timerangeSwitch.js
+Installing /app/sandbox/etc/static/js/munin-overview.js
+Installing /app/sandbox/etc/static/js/munin-serviceview.js
+Installing /app/sandbox/etc/static/js/component-absolute.js
+Installing /app/sandbox/etc/static/js/jquery-3.7.1.min.js
+Installing /app/sandbox/etc/static/js/component-eventruler.js
+Installing /app/sandbox/etc/static/js/querystring.js
+Installing /app/sandbox/etc/static/js/component-dynazoom-modal.js
+Installing /app/sandbox/etc/static/js/component-graph.js
+Installing /app/sandbox/etc/static/js/munin-domainview.js
+Installing /app/sandbox/etc/static/js/script.js
+Installing /app/sandbox/etc/static/js/component-treeview.js
+Installing /app/sandbox/etc/static/js/component-modal.js
+Installing /app/sandbox/etc/static/js/component-toolbar.js
+Installing /app/sandbox/etc/templates/munin-htaccess.in
+Installing /app/sandbox/etc/templates/munin-domainview.tmpl
+Installing /app/sandbox/etc/templates/munin-serviceview.tmpl
+Installing /app/sandbox/etc/templates/munin-dynazoom.tmpl
+Installing /app/sandbox/etc/templates/munin-comparison.tmpl
+Installing /app/sandbox/etc/templates/munin-nodeview.tmpl
+Installing /app/sandbox/etc/templates/munin-overview.tmpl
+Installing /app/sandbox/etc/templates/munin-categoryview.tmpl
+Installing /app/sandbox/etc/templates/munin-problemview.tmpl
+Installing /app/sandbox/etc/templates/partial/footer.tmpl
+Installing /app/sandbox/etc/templates/partial/generated_by.tmpl
+Installing /app/sandbox/etc/templates/partial/head.tmpl
+Installing /app/sandbox/etc/templates/partial/navigation.tmpl
+Installing /app/sandbox/etc/templates/partial/logo_navigation_problem.tmpl
+Installing /app/sandbox/etc/templates/partial/logo_navigation.tmpl
+Installing /app/sandbox/etc/templates/partial/logo_navigation_comparison.tmpl
+Installing /app/sandbox/etc/templates/partial/bottom_navigation.tmpl
+--> 74c78e2b5d0a
+STEP 6/7: EXPOSE 4949 4946
+--> baa0562f2d59
+STEP 7/7: CMD ["./dev_scripts/all"]
+COMMIT munin-dev
+--> ac04cdd13933
+Successfully tagged localhost/munin-dev:latest
+ac04cdd13933c7269c3fabd27cd93ca04ac68e4ea5033de82826256a40a9deb2

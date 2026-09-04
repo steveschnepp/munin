@@ -1,0 +1,5 @@
+Bareword found where operator expected at blib/lib/Munin/Master/Limits.pm line 304, near "'UPDATE state SET alarm = ?, num_unknowns = ? WHERE id = ? AND type = 'ds"
+	(Missing operator before ds?)
+Bad name after ds' at blib/lib/Munin/Master/Limits.pm line 304.
+Compilation failed in require at t/munin_master_limits.t line 9.
+BEGIN failed--compilation aborted at t/munin_master_limits.t line 9.

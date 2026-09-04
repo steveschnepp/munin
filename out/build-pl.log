@@ -1,0 +1,26 @@
+Checking prerequisites...
+  test_requires:
+    !  Devel::Confess is not installed
+    !  Directory::Scratch is not installed
+    !  File::ReadBackwards is not installed
+    !  Net::DNS is not installed
+    !  Net::IP is not installed
+    !  Test::Class is not installed
+    !  Test::LongString is not installed
+    !  Test::Perl::Critic is not installed
+
+ERRORS/WARNINGS FOUND IN PREREQUISITES.  You may wish to install the versions
+of the modules indicated above before proceeding with this installation
+
+Run 'Build installdeps' to install missing prerequisites.
+
+Added to MANIFEST: etc/munin-node.conf.sample
+Added to MANIFEST: etc/munin.conf.sample
+Added to MANIFEST: lib/Munin.pm
+Added to MANIFEST: lib/Munin/Common/Defaults.pm
+Added to MANIFEST: script/munin-cron
+Could not get valid metadata. Error is: Invalid metadata structure. Errors: 'unknown' for 'version' is not a valid version. (version) [Validation: 2]
+ at /usr/share/perl5/Module/Build/Base.pm line 4570.
+
+Could not create MYMETA files
+Creating new 'Build' script for 'Munin' version 'unknown'

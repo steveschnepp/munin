@@ -1,0 +1,5 @@
+Global symbol "%contact_pipes" requires explicit package name (did you forget to declare "my %contact_pipes"?) at blib/lib/Munin/Master/Limits.pm line 410.
+Global symbol "%contact_pipes" requires explicit package name (did you forget to declare "my %contact_pipes"?) at blib/lib/Munin/Master/Limits.pm line 418.
+Global symbol "%contact_pipes" requires explicit package name (did you forget to declare "my %contact_pipes"?) at blib/lib/Munin/Master/Limits.pm line 432.
+Compilation failed in require at t/munin_master_limits.t line 9.
+BEGIN failed--compilation aborted at t/munin_master_limits.t line 9.

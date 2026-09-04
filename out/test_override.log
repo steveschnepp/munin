@@ -1,0 +1,27 @@
+ok 1 - critical range 10:20
+ok 2 - warning range 5:15
+ok 3 - critical single 90
+ok 4 - warning single 80
+ok 5 - critical open-end :100
+ok 6 - warning open-end :80
+ok 7 - critical open-start 5:
+ok 8 - warning open-start 3:
+ok 9 - critical range -10:10
+ok 10 - warning range -5:5
+ok 11 - warning undef when not set
+ok 12 - critical undef when not set
+ok 13 - warning undef when only critical set
+ok 14 - critical single 95
+ok 15 - critical range 1.5:2.5
+ok 16 - warning range 0.5:1.5
+ok 17 - plugin default warning=80
+ok 18 - plugin default critical=90
+ok 19 - no override: warning stays 80
+ok 20 - no override: critical stays 90
+ok 21 - override wins: warning=75
+ok 22 - no override: critical stays 90
+ok 23 - override wins: warning=75
+ok 24 - override wins: critical=95
+ok 25 - parsed override warning
+ok 26 - parsed override critical
+1..26
