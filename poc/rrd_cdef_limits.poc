@@ -1,0 +1,97 @@
+#!/usr/bin/env perl
+# POC: CDEF threshold checking via RRDs::xport
+# Uses fixed epoch timestamps, no real time dependency
+use strict;
+use warnings;
+use RRDs;
+use File::Temp qw(tempdir);
+
+my $dir = tempdir(CLEANUP => 1);
+
+# Fixed epoch - works with RRDs::create --start
+my $T0 = 1_000_000_000;
+my $STEP = 60;
+
+sub make_rrd {
+    my ($name, $ds_names, $rows) = @_;
+    my $rrd = "$dir/$name.rrd";
+
+    my @args = ("--start", $T0, "--step", $STEP);
+    for my $ds (@$ds_names) {
+        push @args, "DS:$ds:GAUGE:120:0:U";
+    }
+    push @args, "RRA:AVERAGE:0.5:1:60";
+
+    RRDs::create($rrd, @args);
+    die "create: " . RRDs::error() if RRDs::error();
+
+    my $t = $T0;
+    for my $row (@$rows) {
+        RRDs::update($rrd, "$t:" . join(":", @$row));
+        die "update: " . RRDs::error() if RRDs::error();
+        $t += $STEP;
+    }
+    return $rrd;
+}
+
+sub fetch_cdef {
+    my ($rrd, $ds_names, $cdef_expr) = @_;
+
+    my @args = ("--start", $T0, "--end", $T0 + 600, "--step", $STEP);
+    for my $ds (@$ds_names) {
+        push @args, "DEF:${ds}=$rrd:${ds}:AVERAGE";
+    }
+    push @args, "CDEF:result=$cdef_expr", "XPORT:result";
+
+    my ($s, $e, $st, $n, $c, $v) = RRDs::xport(@args);
+    return undef if RRDs::error();
+
+    for my $i (reverse 0..$#$v) {
+        return $v->[$i][0] if defined $v->[$i][0];
+    }
+    return undef;
+}
+
+sub state {
+    my ($val, $w, $c) = @_;
+    return 'unknown' if !defined $val;
+    return 'critical' if defined $c && $val > $c;
+    return 'warning' if defined $w && $val > $w;
+    return 'ok';
+}
+
+# === Tests ===
+
+print "=== 1. traffic_total = in + out ===\n";
+my $rrd = make_rrd("t1", [qw(input output)],
+    [[100, 50], [120, 60], [150, 70]]);  # last: 150+70=220
+my $v = fetch_cdef($rrd, [qw(input output)], "in,out,+");
+printf "  total=%.1f  state=%s\n", $v//0, state($v, 150, 200);
+
+print "\n=== 2. cpu_pct = user / (user+sys) * 100 ===\n";
+$rrd = make_rrd("t2", [qw(user sys)],
+    [[40, 20], [60, 30]]);  # last: 60/90*100=66.7%
+$v = fetch_cdef($rrd, [qw(user sys)], "u,100,*,u,s,+,/");
+printf "  pct=%.1f%%  state=%s\n", $v//0, state($v, 70, 90);
+
+print "\n=== 3. max(in, out) via GT/IF ===\n";
+$rrd = make_rrd("t3", [qw(a b)],
+    [[100, 200], [300, 150]]);  # last: max(300,150)=300
+$v = fetch_cdef($rrd, [qw(a b)], "a,b,GT,a,b,IF");
+printf "  max=%.1f  state=%s\n", $v//0, state($v, 250, 350);
+
+print "\n=== 4. delta = last - first (via PREV) ===\n";
+$rrd = make_rrd("t4", [qw(val)],
+    [[100], [150], [200]]);  # last PREV: 150->200, delta=50
+$v = fetch_cdef($rrd, [qw(val)], "v,PREV,-");
+printf "  delta=%.1f  state=%s\n", $v//0, state($v, 40, 80);
+
+print "\n=== 5. ratio = a / b (division) ===\n";
+$rrd = make_rrd("t5", [qw(requests errors)],
+    [[1000, 10], [2000, 50]]);  # last: 50/2000=2.5%
+$v = fetch_cdef($rrd, [qw(requests errors)], "e,r,/,100,*");
+printf "  error_pct=%.2f%%  state=%s\n", $v//0, state($v, 1, 5);
+
+print "\n=== Summary ===\n";
+print "RRDs::xport computes arbitrary CDEFs.\n";
+print "For Limits.pm: one xport call per service with CDEF thresholds.\n";
